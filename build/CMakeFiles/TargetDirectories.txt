@@ -1,0 +1,4 @@
+/home/unknown/dev/REMath/build/CMakeFiles/re_tests.dir
+/home/unknown/dev/REMath/build/CMakeFiles/test.dir
+/home/unknown/dev/REMath/build/CMakeFiles/edit_cache.dir
+/home/unknown/dev/REMath/build/CMakeFiles/rebuild_cache.dir

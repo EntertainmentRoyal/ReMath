@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/re_core_test.dir/tests/re_core_test.c.o -o re_core_test 
