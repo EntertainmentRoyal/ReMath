@@ -22,9 +22,15 @@
    --------------------------- */
 typedef float  RE_f32;
 typedef double RE_f64;
+
+typedef int8_t   RE_i8;
+typedef int16_t  RE_i16;
 typedef int32_t  RE_i32;
-typedef uint32_t RE_u32;
 typedef int64_t  RE_i64;
+
+typedef uint8_t  RE_u8;
+typedef uint16_t RE_u16;
+typedef uint32_t RE_u32;
 typedef uint64_t RE_u64;
 
 /* Branchless boolean type */

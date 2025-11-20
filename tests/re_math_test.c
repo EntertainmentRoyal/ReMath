@@ -113,19 +113,6 @@ static void test_sign(void)
 }
 
 /**
- * @brief Tests Quake-style inverse square root.
- */
-static void test_invsqrt(void)
-{
-    RE_f32 x = 4.f;
-
-    RE_f32 q = RE_INVSQRT(x);
-    RE_f32 r = 1.f / sqrtf(x);
-
-    test_result("INVSQRT approx", approx_eq_f32(q, r, 0.01f));
-}
-
-/**
  * @brief Tests power-of-two helpers.
  */
 static void test_pow2(void)
@@ -165,7 +152,6 @@ void run_math_tests(void)
     test_smoothstep();
     test_rounding();
     test_sign();
-    test_invsqrt();
     test_pow2();
     test_float_classification();
 

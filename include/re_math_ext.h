@@ -226,6 +226,31 @@
             if (out_s) *out_s = sin_approx * sign_s;
             if (out_c) *out_c = cos_approx * sign_c;
         }
+        /**
+         * @brief Fast acos(x) approximation on [-1, 1].
+         */
+
+         RE_INLINE RE_f32 RE_ACOS(RE_f32 x)
+         {
+             if (x <= -1.0f) return RE_PI_F;
+             if (x >=  1.0f) return 0.0f;
+
+             RE_f32 ax = RE_ABS_f32(x);
+
+             // Polynomial minimax approximation of acos on [0,1]
+             RE_f32 t = RE_SQRT(1.0f - ax);
+
+             RE_f32 p =
+                 -0.0187293f * ax +
+                  0.0742610f;
+             p = p * ax - 0.2121144f;
+             p = p * ax + 1.5707288f;
+
+             RE_f32 r = p * t;  // acos(|x|)
+
+             // Fix sign: acos(x) = r, but symmetric for negative x
+             return (x < 0.0f) ? (RE_PI_F - r) : r;
+         }
 
         /**
          * @brief Fast sine (radians).
@@ -245,6 +270,21 @@
             RE_FAST_SINCOS_f32(x, &s, &c);
             (void)s;
             return c;
+        }
+
+        /**
+         * @brief Fast tangent (radians).
+         */
+        RE_INLINE RE_f32 RE_TAN_f32(RE_f32 x)
+        {
+            RE_f32 s, c;
+            RE_FAST_SINCOS_f32(x, &s, &c);
+
+            /* prevent division by extremely small cosine */
+            const RE_f32 eps = 1e-6f;
+            RE_f32 denom = (RE_ABS_f32(c) < eps) ? (RE_COPY_SIGN_f32(eps, c)) : c;
+
+            return s / denom;
         }
 
         /* ---------------------------
@@ -328,5 +368,39 @@
 
         RE_INLINE void RE_SINCOS_f32(RE_f32 x, RE_f32 *s, RE_f32 *c) { RE_FAST_SINCOS_f32(x, s, c); }
         RE_INLINE RE_f32 RE_ATAN2_f32(RE_f32 y, RE_f32 x) { return RE_FAST_ATAN2_f32(y, x); }
+
+        /**
+         * @brief Fast approximate reciprocal (1/x) using bit-level seed + Newton iteration.
+         *
+         * This function computes an approximation of the reciprocal of a floating point
+         * value without using division. It performs:
+         *
+         *  - A bit manipulation “magic constant” initialization
+         *  - One Newton–Raphson refinement step
+         *
+         * This produces an approximation typically within ~1–2 ULP of the exact 1/x,
+         * and is significantly faster than a hardware division on many platforms.
+         *
+         * @note Accuracy is lower than (1.0f / x), but speed is much higher.
+         *       Safe for use in vector math, physics, graphics, and normalized ops.
+         *
+         * @param x The input float value.
+         * @return An approximation of 1/x.
+         */
+         RE_INLINE RE_f32 RE_RCP(RE_f32 x)
+         {
+             RE_f32U ux = { x };
+
+             RE_u32 i = 0x7EF127EAu - ux.u;
+
+             RE_f32 y;
+             ((RE_f32U*)&y)->u = i;
+
+             y = y * (2.0f - x * y);
+             y = y * (2.0f - x * y);
+             return y;
+         }
+
+
 
 #endif

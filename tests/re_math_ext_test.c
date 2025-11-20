@@ -124,6 +124,37 @@ static void test_fast_sincos(void)
     test_result("COS(0) approx", approx_eq_f32(cc, 1.f, 1e-3f));
 }
 
+/**
+ * @brief Tests RE_ACOS accuracy versus system acosf().
+ */
+static void test_acos(void)
+{
+    /* Test a range of values including edges */
+    RE_f32 vals[] = {
+        -1.f, -0.9f, -0.5f, -0.1f,
+         0.0f,
+         0.1f, 0.5f, 0.9f, 1.f
+    };
+
+    for (int i = 0; i < (int)(sizeof(vals)/sizeof(vals[0])); i++)
+    {
+        RE_f32 x = vals[i];
+
+        RE_f32 fast = RE_ACOS(x);
+        RE_f32 ref  = acosf(x);
+
+        char name[64];
+        snprintf(name, sizeof(name), "ACOS approx [%g]", (double)x);
+
+        /* Acceptable error: ~1e-3 */
+        test_result(name, approx_eq_f32(fast, ref, 1e-3f));
+    }
+
+    /* Domain clamps */
+    test_result("ACOS(>1) == 0", RE_ACOS( 2.0f) == 0.0f);
+    test_result("ACOS(<-1) == pi", approx_eq_f32(RE_ACOS(-2.0f), RE_PI_F, 1e-6f));
+}
+
 /* ============================================================================================
    TEST: Fast Atan2
    ============================================================================================ */
@@ -182,6 +213,28 @@ static void test_random_unit_vectors(void)
     test_result("UNIT_VEC3 approx", approx_eq_f32(l3, 1.f, 0.02f));
 }
 
+static void test_rcp(void)
+{
+    const RE_f32 test_vals[] = {
+        1.0f, 0.5f, 2.0f, 4.0f, 10.0f,
+        -0.5f, -1.0f, -2.0f, -10.0f,
+        0.1234f, -0.9876f
+    };
+
+    for (int i = 0; i < (int)(sizeof(test_vals)/sizeof(test_vals[0])); ++i) {
+        RE_f32 x = test_vals[i];
+        RE_f32 approx = RE_RCP(x);
+        RE_f32 exact  = 1.0f / x;
+
+        RE_bool ok = approx_eq_f32(approx, exact, 1e-3f);
+
+        char label[64];
+        snprintf(label, sizeof(label), "RCP(%g)", x);
+
+        test_result(label, ok);
+    }
+}
+
 /* ============================================================================================
    RUN ALL TESTS
    ============================================================================================ */
@@ -194,9 +247,11 @@ void run_math_ext_tests(void)
     test_remap_snap_smooth();
     test_fast_invsqrt_sqrt();
     test_fast_sincos();
+    test_acos();
     test_fast_atan2();
     test_hash_rng();
     test_random_unit_vectors();
+    test_rcp();
 
     printf("=== re_math_ext tests finished ===\n");
 }

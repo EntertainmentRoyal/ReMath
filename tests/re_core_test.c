@@ -130,6 +130,40 @@ static void test_ieee_classification(void)
 }
 
 /**
+ * @brief Tests RE_SQRT accuracy against standard sqrtf.
+ */
+static void test_sqrt(void)
+{
+    RE_f32 vals[] = {0.0f, 0.01f, 0.5f, 1.f, 2.f, 10.f, 123.456f, 9999.f};
+
+    for (int i = 0; i < (int)(sizeof(vals)/sizeof(vals[0])); i++)
+    {
+        RE_f32 x = vals[i];
+
+        RE_f32 fast = RE_SQRT(x);
+        RE_f32 ref  = sqrtf(x);
+
+        RE_bool ok = approx_eq_f32(fast, ref, 1e-4f);
+
+        char name[64];
+        snprintf(name, sizeof(name), "SQRT approx match [%g]", (double)x);
+
+        test_result(name, ok);
+    }
+
+    /* Monotonicity test */
+    test_result("SQRT monotonic 1",
+        RE_SQRT(4.0f) > RE_SQRT(1.0f));
+
+    test_result("SQRT monotonic 2",
+        RE_SQRT(100.0f) > RE_SQRT(25.0f));
+
+    /* Behavior on zero and negative */
+    test_result("SQRT(0) == 0", RE_SQRT(0.0f) == 0.0f);
+    test_result("SQRT(-5) == 0", RE_SQRT(-5.0f) == 0.0f);
+}
+
+/**
  * @brief Tests Quake inverse square root accuracy.
  */
 static void test_invsqrt(void)
@@ -311,6 +345,7 @@ void run_core_tests(void)
     test_clz_ctz_popcnt();
     test_min_max_clamp();
     test_ieee_classification();
+    test_sqrt();
     test_invsqrt();
     test_snorm_pack_unpack();
     test_abs_copy_sign_select();

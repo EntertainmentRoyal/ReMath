@@ -242,6 +242,25 @@ RE_INLINE RE_f32 RE_INVSQRT(RE_f32 number) {
 	return y;
 }
 
+/**
+ * @brief Fast square root using inverse square root + one Newton refinement.
+ */
+RE_INLINE RE_f32 RE_SQRT(RE_f32 number) {
+    if (number <= 0.0f) return 0.0f;
+
+    RE_f32 inv = RE_INVSQRT(number);
+
+    // sqrt(x) = x * inv_sqrt(x)
+    RE_f32 y = number * inv;
+
+    // One Newton refinement for sqrt
+    // y = 0.5 * (y + x / y)
+    y = 0.5f * (y + number / y);
+
+    return y;
+}
+
+
 // Power of two helpers
 RE_INLINE RE_bool RE_IS_POW2(RE_u32 x) { return (x != 0) && ((x & (x - 1)) == 0); }
 

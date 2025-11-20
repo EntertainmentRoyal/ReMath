@@ -1,34 +1,44 @@
 cmake_minimum_required(VERSION 3.28)
 
-project(REMath C)
+project(REMath C CXX)
 
-# ============================================
-# Enable testing support
-# ============================================
+# =============================
+# Enable testing
+# =============================
 enable_testing()
 
-# ============================================
-# Collect ALL test .c files from /tests folder
-# ============================================
+# =============================
+# Collect all test .cpp files
+# =============================
 file(GLOB_RECURSE TEST_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp
 )
 
-# ============================================
-# Create ONE executable that contains ALL tests
-# ============================================
+# =============================
+# Create test executable
+# =============================
 add_executable(re_tests
     ${TEST_SOURCES}
 )
 
+# =============================
+# Include paths
+# =============================
 target_include_directories(re_tests PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/include             # RE Library
+    ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/GLM    # GLM Library
 )
 
-target_compile_features(re_tests PRIVATE c_std_99)
-target_link_libraries(re_tests PRIVATE m)
+# =============================
+# Compile features
+# =============================
+target_compile_features(re_tests PRIVATE
+    c_std_99
+    cxx_std_20
+)
 
-# ============================================
-# Register ONE test with CTest
-# ============================================
+# =============================
+# Register CTest test
+# =============================
 add_test(NAME re_tests COMMAND re_tests)
