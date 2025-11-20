@@ -187,6 +187,30 @@ tests/re_core_test.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_core_test.c.s
 .PHONY : tests/re_core_test.c.s
 
+tests/re_mat_test.o: tests/re_mat_test.cpp.o
+.PHONY : tests/re_mat_test.o
+
+# target to build an object file
+tests/re_mat_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o
+.PHONY : tests/re_mat_test.cpp.o
+
+tests/re_mat_test.i: tests/re_mat_test.cpp.i
+.PHONY : tests/re_mat_test.i
+
+# target to preprocess a source file
+tests/re_mat_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.i
+.PHONY : tests/re_mat_test.cpp.i
+
+tests/re_mat_test.s: tests/re_mat_test.cpp.s
+.PHONY : tests/re_mat_test.s
+
+# target to generate assembly for a file
+tests/re_mat_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.s
+.PHONY : tests/re_mat_test.cpp.s
+
 tests/re_math_ext_test.o: tests/re_math_ext_test.c.o
 .PHONY : tests/re_math_ext_test.o
 
@@ -235,6 +259,30 @@ tests/re_math_test.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_math_test.c.s
 .PHONY : tests/re_math_test.c.s
 
+tests/test_vec.o: tests/test_vec.cpp.o
+.PHONY : tests/test_vec.o
+
+# target to build an object file
+tests/test_vec.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/test_vec.cpp.o
+.PHONY : tests/test_vec.cpp.o
+
+tests/test_vec.i: tests/test_vec.cpp.i
+.PHONY : tests/test_vec.i
+
+# target to preprocess a source file
+tests/test_vec.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/test_vec.cpp.i
+.PHONY : tests/test_vec.cpp.i
+
+tests/test_vec.s: tests/test_vec.cpp.s
+.PHONY : tests/test_vec.s
+
+# target to generate assembly for a file
+tests/test_vec.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/test_vec.cpp.s
+.PHONY : tests/test_vec.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -251,12 +299,18 @@ help:
 	@echo "... tests/re_core_test.o"
 	@echo "... tests/re_core_test.i"
 	@echo "... tests/re_core_test.s"
+	@echo "... tests/re_mat_test.o"
+	@echo "... tests/re_mat_test.i"
+	@echo "... tests/re_mat_test.s"
 	@echo "... tests/re_math_ext_test.o"
 	@echo "... tests/re_math_ext_test.i"
 	@echo "... tests/re_math_ext_test.s"
 	@echo "... tests/re_math_test.o"
 	@echo "... tests/re_math_test.i"
 	@echo "... tests/re_math_test.s"
+	@echo "... tests/test_vec.o"
+	@echo "... tests/test_vec.i"
+	@echo "... tests/test_vec.s"
 .PHONY : help
 
 

@@ -12,6 +12,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/unknown/dev/REMath/tests/re_core_test.c" "CMakeFiles/re_tests.dir/tests/re_core_test.c.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_core_test.c.o.d"
   "/home/unknown/dev/REMath/tests/re_math_ext_test.c" "CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o.d"
   "/home/unknown/dev/REMath/tests/re_math_test.c" "CMakeFiles/re_tests.dir/tests/re_math_test.c.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_math_test.c.o.d"
+  "/home/unknown/dev/REMath/tests/re_mat_test.cpp" "CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o.d"
+  "/home/unknown/dev/REMath/tests/test_vec.cpp" "CMakeFiles/re_tests.dir/tests/test_vec.cpp.o" "gcc" "CMakeFiles/re_tests.dir/tests/test_vec.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
