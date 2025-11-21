@@ -165,14 +165,6 @@
         return RE_INV_SQRT_REFINE_f32(number, y);
     }
 
-    /**
-     * @brief Fast sqrt using inv sqrt.
-     */
-    RE_INLINE RE_f32 RE_SQRT_FAST_f32(RE_f32 x) {
-        if (x <= 0.0f) return 0.0f;
-        return x * RE_INV_SQRT_FAST_f32(x);
-    }
-
     /* ------------------------------------------------------------
        fabsf — bitmask clear sign bit
        ------------------------------------------------------------ */

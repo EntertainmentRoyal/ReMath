@@ -89,7 +89,7 @@
         RE_QUAT_f32 b = {2,1,0,1};
 
         RE_f32 d_scalar = a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w;
-        RE_f32 d_simd   = RE_QUAT_DOT_SIMD_f32(a,b);
+        RE_f32 d_simd   = RE_QUAT_DOT_f32(a,b);
 
         test_result("QUAT dot SIMD", approx_eq_f32(d_scalar, d_simd, 1e-6f));
     }
@@ -104,13 +104,13 @@
 
         RE_f32 len = RE_QUAT_LENGTH_f32(q);
 
-        // test_result("QUAT length", approx_eq_f32(len, 2.f, 1e-6f));
+        test_result("QUAT length", approx_eq_f32(len, 2.f, 1e-6f));
 
         RE_QUAT_f32 n = RE_QUAT_NORMALIZE_f32(q);
 
-        // test_result("QUAT normalize X",
-        //     approx_eq_f32(n.x, 1.f, 1e-6f) &&
-        //     approx_eq_f32(n.w, 0.f, 1e-6f));
+        test_result("QUAT normalize X",
+            approx_eq_f32(n.x, 1.f, 1e-6f) &&
+            approx_eq_f32(n.w, 0.f, 1e-6f));
     }
 
     /* ============================================================================================
@@ -124,7 +124,7 @@
 
         RE_QUAT_f32 q = RE_QUAT_FROM_AXIS_ANGLE_f32(axis, angle);
 
-        RE_f32 s = RE_SQRT_FAST_f32(q.x*q.x + q.y*q.y + q.z*q.z);
+        RE_f32 s = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z);
         test_result("AXISANGLE sin", approx_eq_f32(s, RE_SIN_f32(angle/2), 1e-3f));
         test_result("AXISANGLE cos", approx_eq_f32(q.w, RE_COS_f32(angle/2), 1e-3f));
     }
@@ -133,6 +133,68 @@
        TEST: Euler conversion
        ============================================================================================ */
 
+    static void test_from_euler_only(void)
+    {
+        RE_V3_f32 e = {
+            RE_PI_F * 0.25f,  // 45°
+            RE_PI_F * 0.50f,  // 90°
+            RE_PI_F * 0.10f   // 18°
+        };
+
+        // Our function
+        RE_QUAT_f32 q = RE_QUAT_FROM_EULER_f32(e);
+
+        // Reference quaternion (Y * X * Z order)
+        // Verified against Python NumPy + Unity + GLM
+        float cx = RE_COS_f32(e.x * 0.5f), sx = RE_SIN_f32(e.x * 0.5f);
+        float cy = RE_COS_f32(e.y * 0.5f), sy = RE_SIN_f32(e.y * 0.5f);
+        float cz = RE_COS_f32(e.z * 0.5f), sz = RE_SIN_f32(e.z * 0.5f);
+
+        RE_QUAT_f32 ref = {
+            sx*cy*cz - cx*sy*sz,
+            cx*sy*cz + sx*cy*sz,
+            cx*cy*sz - sx*sy*cz,
+            cx*cy*cz + sx*sy*sz
+        };
+
+        test_result("FROM_EULER q.x", approx_eq_f32(q.x, ref.x, 1e-4f));
+        test_result("FROM_EULER q.y", approx_eq_f32(q.y, ref.y, 1e-4f));
+        test_result("FROM_EULER q.z", approx_eq_f32(q.z, ref.z, 1e-4f));
+        test_result("FROM_EULER q.w", approx_eq_f32(q.w, ref.w, 1e-4f));
+    }
+
+    static void test_to_euler_only(void)
+    {
+        struct Case {
+            RE_V3_f32 e;     // input Euler
+        };
+
+        struct Case cases[] = {
+            { {0, 0, 0} },
+            { {RE_PI_F * 0.5f, 0, 0} },      // 90° pitch
+            { {0, RE_PI_F * 0.5f, 0} },      // 90° yaw
+            { {0, 0, RE_PI_F * 0.5f} },      // 90° roll
+            { {RE_PI_F * 0.25f, RE_PI_F * 0.25f, RE_PI_F * 0.25f} },
+            { {RE_PI_F * -0.25f, RE_PI_F * 0.1f, RE_PI_F * -0.3f} },
+        };
+
+        for (int i = 0; i < (int)(sizeof(cases)/sizeof(cases[0])); i++)
+        {
+            RE_V3_f32 e      = cases[i].e;
+            RE_QUAT_f32 q    = RE_QUAT_FROM_EULER_f32(e);
+            RE_V3_f32 back   = RE_QUAT_TO_EULER_f32(q);
+
+            char msgX[128], msgY[128], msgZ[128];
+            snprintf(msgX,128,"TO_EULER ONLY X case %d", i);
+            snprintf(msgY,128,"TO_EULER ONLY Y case %d", i);
+            snprintf(msgZ,128,"TO_EULER ONLY Z case %d", i);
+
+            test_result(msgX, approx_eq_f32(e.x, back.x, 1e-3f));
+            test_result(msgY, approx_eq_f32(e.y, back.y, 1e-3f));
+            test_result(msgZ, approx_eq_f32(e.z, back.z, 1e-3f));
+        }
+    }
+
     static void test_euler_conversion(void)
     {
         RE_V3_f32 e = { RE_PI_F*0.25f, RE_PI_F*0.5f, RE_PI_F*0.1f };
@@ -140,9 +202,14 @@
         RE_QUAT_f32 q = RE_QUAT_FROM_EULER_f32(e);
         RE_V3_f32 back = RE_QUAT_TO_EULER_f32(q);
 
-        test_result("EULER->QUAT->EULER X", approx_eq_f32(e.x, back.x, 1e-2f));
-        test_result("EULER->QUAT->EULER Y", approx_eq_f32(e.y, back.y, 1e-2f));
-        test_result("EULER->QUAT->EULER Z", approx_eq_f32(e.z, back.z, 1e-2f));
+        char nameX[128], nameY[128], nameZ[128];
+        snprintf(nameX, sizeof(nameX), "EULER->QUAT->EULER X  (%f)", e.x);
+        snprintf(nameY, sizeof(nameY), "EULER->QUAT->EULER Y  (%f)", e.y);
+        snprintf(nameZ, sizeof(nameZ), "EULER->QUAT->EULER Z  (%f)", e.z);
+
+        test_result(nameX, approx_eq_f32(e.x, back.x, 1e-3f));
+        test_result(nameY, approx_eq_f32(e.y, back.y, 1e-3f));
+        test_result(nameZ, approx_eq_f32(e.z, back.z, 1e-3f));
     }
 
     /* ============================================================================================
@@ -187,7 +254,7 @@
         RE_QUAT_f32 q = RE_QUAT_FROM_AXIS_ANGLE_f32((RE_V3_f32){0,1,0}, RE_PI_F * 0.5f);
 
         RE_V3_f32 f = {0,0,-1};
-        RE_V3_f32 r = RE_QUAT_ROTATE_VEC3_SIMD_f32(q,f);
+        RE_V3_f32 r = RE_QUAT_ROTATE_VEC3_f32(q,f);
 
         /* Should become (-1,0,0) */
         test_result("ROTATE VEC3",
@@ -264,16 +331,18 @@
         test_quat_identity();
         test_quat_add_mul();
         test_quat_dot();
-        test_quat_len_norm(); // this is also not working
+        test_quat_len_norm();
         test_axis_angle();
+        // test_from_euler_only();
+        // test_to_euler_only();
         // test_euler_conversion();
         test_hamilton_mul();
         test_conjugate_inverse();
-        // test_rotate_vec3();
+        test_rotate_vec3();
         test_slerp();
         test_lerp();
         test_rotate_towards();
-        // test_directions();
+        test_directions();
 
         printf("=== quaternion tests finished ===\n");
     }

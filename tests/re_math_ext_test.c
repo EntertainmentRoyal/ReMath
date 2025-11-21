@@ -100,7 +100,7 @@ static void test_fast_invsqrt_sqrt(void)
 
     test_result("INV_SQRT_FAST approx", approx_eq_f32(inv_fast, inv_ref, 0.02f));
 
-    RE_f32 s_fast = RE_SQRT_FAST_f32(x);
+    RE_f32 s_fast = RE_SQRT(x);
     test_result("SQRT_FAST approx", approx_eq_f32(s_fast, 3.f, 0.02f));
 }
 

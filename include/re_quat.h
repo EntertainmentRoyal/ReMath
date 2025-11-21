@@ -111,7 +111,7 @@ RE_INLINE RE_QUAT_f64 RE_QUAT_MUL_f64(RE_QUAT_f64 a, RE_QUAT_f64 b)
 
 RE_INLINE RE_f32 RE_QUAT_LENGTH_f32(RE_QUAT_f32 q)
 {
-    return RE_SQRT_FAST_f32(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
+    return RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
 }
 
 RE_INLINE RE_f64 RE_QUAT_LENGTH_f64(RE_QUAT_f64 q)
@@ -123,7 +123,7 @@ RE_INLINE RE_QUAT_f32 RE_QUAT_NORMALIZE_f32(RE_QUAT_f32 q)
 {
     RE_f32 l = RE_QUAT_LENGTH_f32(q);
     if (l <= 0.0f) return RE_QUAT_IDENTITY_f32();
-    RE_f32 inv = RE_RCP(l);
+    RE_f32 inv =  1.0f / l;
 
     RE_QUAT_f32 r = { q.x*inv, q.y*inv, q.z*inv, q.w*inv };
     return r;
@@ -276,212 +276,41 @@ RE_INLINE RE_QUAT_f32 RE_QUAT_SLERP_f32(RE_QUAT_f32 a, RE_QUAT_f32 b, RE_f32 t)
     return q;
 }
 
-/* ================================================================
-   SIMD DETECTION
-   ================================================================ */
-
-#if defined(__AVX__)
-    #define RE_SIMD_AVX 1
-#elif defined(__SSE2__) || defined(_MSC_VER)
-    #define RE_SIMD_SSE 1
-#elif defined(__ARM_NEON) || defined(__ARM_NEON__)
-    #define RE_SIMD_NEON 1
-#else
-    #define RE_SIMD_NONE 1
-#endif
-
-
-/* ================================================================
-   SIMD: QUAT DOT
-   ================================================================ */
-
-#if RE_SIMD_AVX
-#include <immintrin.h>
-
-RE_INLINE RE_f32 RE_QUAT_DOT_SIMD_f32(RE_QUAT_f32 a, RE_QUAT_f32 b)
+RE_INLINE RE_V3_f32 RE_QUAT_ROTATE_VEC3_f32(RE_QUAT_f32 q, RE_V3_f32 v)
 {
-    __m128 qa = _mm_loadu_ps(&a.x);
-    __m128 qb = _mm_loadu_ps(&b.x);
-    __m128 mul = _mm_mul_ps(qa, qb);
+    RE_f32 len2 = RE_QUAT_LENGTH_f32(q);
+    if (len2 < 1e-12f)
+        return v;
 
-    __m128 sum1 = _mm_hadd_ps(mul, mul);
-    __m128 sum2 = _mm_hadd_ps(sum1, sum1);
+    RE_f32 inv_len = 1.0f / RE_SQRT(len2);
 
-    return _mm_cvtss_f32(sum2);
-}
+    RE_f32 x = q.x * inv_len;
+    RE_f32 y = q.y * inv_len;
+    RE_f32 z = q.z * inv_len;
+    RE_f32 w = q.w * inv_len;
 
-#elif RE_SIMD_SSE
-#include <xmmintrin.h>
-#include <pmmintrin.h>
+    // t = 2 * cross(q.xyz, v)
+    RE_V3_f32 t;
+    t.x = 2.0f * (y*v.z - z*v.y);
+    t.y = 2.0f * (z*v.x - x*v.z);
+    t.z = 2.0f * (x*v.y - y*v.x);
 
-RE_INLINE RE_f32 RE_QUAT_DOT_SIMD_f32(RE_QUAT_f32 a, RE_QUAT_f32 b)
-{
-    __m128 qa = _mm_loadu_ps(&a.x);
-    __m128 qb = _mm_loadu_ps(&b.x);
-    __m128 mul = _mm_mul_ps(qa, qb);
+    // v' = v + w*t + cross(q.xyz, t)
+    RE_V3_f32 r;
 
-    __m128 shuffle = _mm_movehdup_ps(mul);
-    __m128 sum = _mm_add_ps(mul, shuffle);
-    shuffle = _mm_movehl_ps(shuffle, sum);
-    sum = _mm_add_ss(sum, shuffle);
+    // w*t
+    RE_V3_f32 wt = { w*t.x, w*t.y, w*t.z };
 
-    return _mm_cvtss_f32(sum);
-}
+    // cross(q.xyz, t)
+    RE_V3_f32 c;
+    c.x = y*t.z - z*t.y;
+    c.y = z*t.x - x*t.z;
+    c.z = x*t.y - y*t.x;
 
-#elif RE_SIMD_NEON
-#include <arm_neon.h>
+    r.x = v.x + wt.x + c.x;
+    r.y = v.y + wt.y + c.y;
+    r.z = v.z + wt.z + c.z;
 
-RE_INLINE RE_f32 RE_QUAT_DOT_SIMD_f32(RE_QUAT_f32 a, RE_QUAT_f32 b)
-{
-    float32x4_t va = vld1q_f32(&a.x);
-    float32x4_t vb = vld1q_f32(&b.x);
-    float32x4_t mul = vmulq_f32(va, vb);
-    float32x2_t sum2 = vadd_f32(vget_low_f32(mul), vget_high_f32(mul));
-    float32x2_t sum1 = vpadd_f32(sum2, sum2);
-    return vget_lane_f32(sum1, 0);
-}
-
-#else
-RE_INLINE RE_f32 RE_QUAT_DOT_SIMD_f32(RE_QUAT_f32 a, RE_QUAT_f32 b)
-{
-    return a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w;
-}
-#endif
-
-
-/* ================================================================
-   SIMD: LENGTH SQUARED
-   ================================================================ */
-
-RE_INLINE RE_f32 RE_QUAT_LEN2_SIMD_f32(RE_QUAT_f32 q)
-{
-    return RE_QUAT_DOT_SIMD_f32(q, q);
-}
-
-
-/* ================================================================
-   SIMD: NORMALIZE
-   (fast, stable)
-   ================================================================ */
-
-RE_INLINE RE_QUAT_f32 RE_QUAT_NORMALIZE_SIMD_f32(RE_QUAT_f32 q)
-{
-    RE_f32 len2 = RE_QUAT_LEN2_SIMD_f32(q);
-
-    if (len2 <= 0.0f)
-        return RE_QUAT_IDENTITY_f32();
-
-    RE_f32 inv = RE_INV_SQRT_FAST_f32(len2);
-
-    RE_QUAT_f32 r = {
-        q.x * inv,
-        q.y * inv,
-        q.z * inv,
-        q.w * inv
-    };
-    return r;
-}
-
-
-/* ================================================================
-   SIMD: HAMILTON PRODUCT (q1 * q2)
-   (Partial SIMD — best for x,y,z ops)
-   ================================================================ */
-
-#if RE_SIMD_AVX || RE_SIMD_SSE
-
-RE_INLINE RE_QUAT_f32 RE_QUAT_MUL_SIMD_f32(RE_QUAT_f32 a, RE_QUAT_f32 b)
-{
-    /* load both quats */
-    __m128 qa = _mm_loadu_ps(&a.x);
-    __m128 qb = _mm_loadu_ps(&b.x);
-
-    /* Shuffle masks */
-    const __m128 sign_mask_x = _mm_set_ps(-1, 1, 1, 1);
-    const __m128 sign_mask_y = _mm_set_ps( 1,-1, 1, 1);
-    const __m128 sign_mask_z = _mm_set_ps( 1, 1,-1, 1);
-
-    /* compute */
-    __m128 bx = _mm_shuffle_ps(qb, qb, _MM_SHUFFLE(0,0,0,0));
-    __m128 by = _mm_shuffle_ps(qb, qb, _MM_SHUFFLE(1,1,1,1));
-    __m128 bz = _mm_shuffle_ps(qb, qb, _MM_SHUFFLE(2,2,2,2));
-    __m128 bw = _mm_shuffle_ps(qb, qb, _MM_SHUFFLE(3,3,3,3));
-
-    __m128 rx = _mm_mul_ps(qa, bx);
-    __m128 ry = _mm_mul_ps(qa, by);
-    __m128 rz = _mm_mul_ps(qa, bz);
-    __m128 rw = _mm_mul_ps(qa, bw);
-
-    rx = _mm_mul_ps(rx, sign_mask_x);
-    ry = _mm_mul_ps(ry, sign_mask_y);
-    rz = _mm_mul_ps(rz, sign_mask_z);
-
-    __m128 out = _mm_add_ps(_mm_add_ps(rx, ry), _mm_add_ps(rz, rw));
-
-    RE_QUAT_f32 r;
-    _mm_storeu_ps(&r.x, out);
-    return r;
-}
-
-#elif RE_SIMD_NEON
-
-RE_INLINE RE_QUAT_f32 RE_QUAT_MUL_SIMD_f32(RE_QUAT_f32 a, RE_QUAT_f32 b)
-{
-    float32x4_t qa = vld1q_f32(&a.x);
-    float32x4_t qb = vld1q_f32(&b.x);
-
-    float32x4_t bx = vdupq_n_f32(b.x);
-    float32x4_t by = vdupq_n_f32(b.y);
-    float32x4_t bz = vdupq_n_f32(b.z);
-    float32x4_t bw = vdupq_n_f32(b.w);
-
-    float32x4_t rx = vmulq_f32(qa, bx);
-    float32x4_t ry = vmulq_f32(qa, by);
-    float32x4_t rz = vmulq_f32(qa, bz);
-    float32x4_t rw = vmulq_f32(qa, bw);
-
-    /* sign patterns */
-    const float32x4_t sx = { 1, 1, 1,-1};
-    const float32x4_t sy = { 1, 1,-1, 1};
-    const float32x4_t sz = { 1,-1, 1, 1};
-
-    rx = vmulq_f32(rx, sx);
-    ry = vmulq_f32(ry, sy);
-    rz = vmulq_f32(rz, sz);
-
-    float32x4_t out = vaddq_f32(vaddq_f32(rx, ry), vaddq_f32(rz, rw));
-
-    RE_QUAT_f32 r;
-    vst1q_f32(&r.x, out);
-    return r;
-}
-
-#else
-
-RE_INLINE RE_QUAT_f32 RE_QUAT_MUL_SIMD_f32(RE_QUAT_f32 a, RE_QUAT_f32 b)
-{
-    return RE_QUAT_MUL_f32(a, b);
-}
-
-#endif
-
-
-/* ================================================================
-   SIMD ROTATE VECTOR (v' = q * v * q^-1)
-   ================================================================ */
-
-RE_INLINE RE_V3_f32 RE_QUAT_ROTATE_VEC3_SIMD_f32(RE_QUAT_f32 q, RE_V3_f32 v)
-{
-    RE_QUAT_f32 pure = { v.x, v.y, v.z, 0.f };
-
-    RE_QUAT_f32 qn = RE_QUAT_NORMALIZE_SIMD_f32(q);
-
-    RE_QUAT_f32 res = RE_QUAT_MUL_SIMD_f32(
-        RE_QUAT_MUL_SIMD_f32(qn, pure),
-        (RE_QUAT_f32){ -qn.x, -qn.y, -qn.z, qn.w }
-    );
-
-    RE_V3_f32 r = { res.x, res.y, res.z };
     return r;
 }
 
@@ -502,11 +331,20 @@ RE_INLINE RE_QUAT_f64 RE_QUAT_CONJUGATE_f64(RE_QUAT_f64 q)
    -------------------------- */
 RE_INLINE RE_QUAT_f32 RE_QUAT_INVERSE_f32(RE_QUAT_f32 q)
 {
-    RE_f32 len2 = RE_QUAT_LEN2_SIMD_f32(q);
-    if (len2 <= 0.0f) return RE_QUAT_IDENTITY_f32();
-    RE_f32 inv = 1.0f / len2;
+    RE_f32 len2 =
+        q.x*q.x + q.y*q.y +
+        q.z*q.z + q.w*q.w;
 
-    RE_QUAT_f32 r = { -q.x * inv, -q.y * inv, -q.z * inv, q.w * inv };
+    if (len2 <= 1e-12f)
+        return RE_QUAT_IDENTITY_f32();
+
+    RE_f32 inv = RE_RCP(len2);
+
+    RE_QUAT_f32 r;
+    r.x = -q.x * inv;
+    r.y = -q.y * inv;
+    r.z = -q.z * inv;
+    r.w =  q.w * inv;
     return r;
 }
 
@@ -541,28 +379,44 @@ RE_QUAT_ROTATE_AXIS_f32(RE_V3_f32 axis, RE_f32 angle_rad)
 
 RE_INLINE RE_QUAT_f32 RE_QUAT_FROM_EULER_f32(RE_V3_f32 e)
 {
-    RE_f32 cx = RE_COS_f32(e.x * 0.5f), sx = RE_SIN_f32(e.x * 0.5f);
-    RE_f32 cy = RE_COS_f32(e.y * 0.5f), sy = RE_SIN_f32(e.y * 0.5f);
-    RE_f32 cz = RE_COS_f32(e.z * 0.5f), sz = RE_SIN_f32(e.z * 0.5f);
+    RE_QUAT_f32 q;
+
+    RE_f32 len = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
+        if (len > 0.0f) {
+            RE_f32 inv = 1.0f / len;
+            q.x *= inv; q.y *= inv; q.z *= inv; q.w *= inv;
+        }
+
+        RE_f32 sinp = 2.0f * (q.w*q.x + q.y*q.z);
+        RE_f32 cosp = 1.0f - 2.0f * (q.x*q.x + q.y*q.y);
+        e.x = RE_ATAN2_f32(sinp, cosp);
+
+        RE_f32 siny = 2.0f * (q.w*q.y - q.z*q.x);
+        if (RE_FABS_f32(siny) >= 1)
+            e.y = RE_COPYSIGN_f32(RE_PI_F/2.0f, siny);
+        else
+            e.y = RE_ASIN(siny);
+
+        RE_f32 sinr = 2.0f * (q.w*q.z + q.x*q.y);
+        RE_f32 cosr = 1.0f - 2.0f * (q.y*q.y + q.z*q.z);
+        e.z = RE_ATAN2_f32(sinr, cosr);
+
+        return q;
+}
+
+RE_INLINE RE_QUAT_f32 RE_QUAT_FROM_EULER_f64(RE_V3_f64 e)
+{
+    RE_f64 hx = e.x * 0.5f;
+    RE_f64 hy = e.y * 0.5f;
+    RE_f64 hz = e.z * 0.5f;
+
+    RE_f32 cx = RE_COS_f32(hx), sx = RE_SIN_f32(hx);
+    RE_f32 cy = RE_COS_f32(hy), sy = RE_SIN_f32(hy);
+    RE_f32 cz = RE_COS_f32(hz), sz = RE_SIN_f32(hz);
 
     RE_QUAT_f32 q;
 
-    q.w = cx*cy*cz + sx*sy*sz;
-    q.x = sx*cy*cz - cx*sy*sz;
-    q.y = cx*sy*cz + sx*cy*sz;
-    q.z = cx*cy*sz - sx*sy*cz;
-
-    return q;
-}
-
-RE_INLINE RE_QUAT_f64 RE_QUAT_FROM_EULER_f64(RE_V3_f64 e)
-{
-    RE_f64 cx = RE_COS_f32(e.x * 0.5), sx = RE_SIN_f32(e.x * 0.5);
-    RE_f64 cy = RE_COS_f32(e.y * 0.5), sy = RE_SIN_f32(e.y * 0.5);
-    RE_f64 cz = RE_COS_f32(e.z * 0.5), sz = RE_SIN_f32(e.z * 0.5);
-
-    RE_QUAT_f64 q;
-
+    // XYZ intrinsic rotation (Rz * Ry * Rx)
     q.w = cx*cy*cz + sx*sy*sz;
     q.x = sx*cy*cz - cx*sy*sz;
     q.y = cx*sy*cz + sx*cy*sz;
@@ -580,17 +434,28 @@ RE_INLINE RE_V3_f32 RE_QUAT_TO_EULER_f32(RE_QUAT_f32 q)
 {
     RE_V3_f32 e;
 
-    // Yaw (Y)
-    e.y = RE_ATAN2_f32(2*(q.w*q.y + q.x*q.z),
-                 1 - 2*(q.y*q.y + q.x*q.x));
+    RE_f32 len = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
+    if (len > 0.0f) {
+        RE_f32 inv = 1.0f / len;
+        q.x *= inv; q.y *= inv; q.z *= inv; q.w *= inv;
+    }
 
-    // Pitch (X)
-    RE_f32 s = 2*(q.w*q.x - q.z*q.y);
-    e.x = (RE_FABS_f32(s) >= 1) ? RE_COPYSIGN_f32(RE_PI_F, s) : RE_ASIN(s);
+    // ZYX extraction (roll, yaw, pitch)
+    // pitch (X)
+    RE_f32 sinp = 2.0f * (q.w*q.x + q.y*q.z);
+    RE_f32 cosp = 1.0f - 2.0f * (q.x*q.x + q.y*q.y);
+    e.x = RE_ATAN2_f32(sinp, cosp);
 
-    // Roll (Z)
-    e.z = RE_ATAN2_f32(2*(q.w*q.z + q.y*q.x),
-                 1 - 2*(q.z*q.z + q.x*q.x));
+    // yaw (Y)
+    RE_f32 siny = 2.0f * (q.w*q.y - q.z*q.x);
+    if (RE_FABS_f32(siny) >= 1.0f)
+            e.y = RE_COPYSIGN_f32(RE_PI_F * 0.5f, siny); // clamp
+    else e.y = RE_ASIN(siny);
+
+    // roll (Z)
+    RE_f32 sinr = 2.0f * (q.w*q.z + q.x*q.y);
+    RE_f32 cosr = 1.0f - 2.0f * (q.y*q.y + q.z*q.z);
+    e.z = RE_ATAN2_f32(sinr, cosr);
 
     return e;
 }
@@ -599,14 +464,29 @@ RE_INLINE RE_V3_f64 RE_QUAT_TO_EULER_f64(RE_QUAT_f64 q)
 {
     RE_V3_f64 e;
 
-    e.y = RE_ATAN2_f32(2*(q.w*q.y + q.x*q.z),
-                1 - 2*(q.y*q.y + q.x*q.x));
+    RE_f64 len = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
+    if (len > 0.0f) {
+        RE_f64 inv = 1.0f / len;
+        q.x *= inv; q.y *= inv; q.z *= inv; q.w *= inv;
+    }
 
-    RE_f64 s = 2*(q.w*q.x - q.z*q.y);
-    e.x = (RE_FABS_f32(s) >= 1) ? RE_COPYSIGN_f32(RE_PI_F, s) : RE_ACOS(s);
+    RE_f64 sp = 2.0f * (q.w*q.x - q.y*q.z);
+    if (sp >= 1.0f)
+        e.x = RE_PI_F * 0.5f;   // +90°
+    else if (sp <= -1.0f)
+        e.x = -RE_PI_F * 0.5f;  // -90°
+    else
+        e.x = RE_ASIN(sp);
 
-    e.z = RE_ATAN2_f32(2*(q.w*q.z + q.y*q.x),
-                1 - 2*(q.z*q.z + q.x*q.x));
+    e.y = RE_ATAN2_f32(
+        2.0f * (q.w*q.y + q.z*q.x),
+        1.0f - 2.0f * (q.x*q.x + q.y*q.y)
+    );
+
+    e.z = RE_ATAN2_f32(
+        2.0f * (q.w*q.z + q.x*q.y),
+        1.0f - 2.0f * (q.x*q.x + q.z*q.z)
+    );
 
     return e;
 }
@@ -665,6 +545,10 @@ RE_INLINE RE_QUAT_f64 RE_QUAT_SLERP_f64(RE_QUAT_f64 a, RE_QUAT_f64 b, RE_f64 t)
     return r;
 }
 
+RE_INLINE RE_f32 RE_QUAT_DOT_f32(RE_QUAT_f32 a, RE_QUAT_f32 b)
+{
+    return a.x*b.x + a.y*b.y + a.z*b.z + a.w*b.w;
+}
 
 /* ============================================================================
    ROTATE TOWARDS (unity-compatible)
@@ -673,7 +557,7 @@ RE_INLINE RE_QUAT_f64 RE_QUAT_SLERP_f64(RE_QUAT_f64 a, RE_QUAT_f64 b, RE_f64 t)
 RE_INLINE RE_QUAT_f32
 RE_QUAT_ROTATE_TOWARDS_f32(RE_QUAT_f32 a, RE_QUAT_f32 b, RE_f32 max_rad)
 {
-    RE_f32 dot = RE_QUAT_DOT_SIMD_f32(a, b);
+    RE_f32 dot = RE_QUAT_DOT_f32(a, b);
 
     if (dot > 0.999999f)
         return b;
@@ -692,17 +576,17 @@ RE_QUAT_ROTATE_TOWARDS_f32(RE_QUAT_f32 a, RE_QUAT_f32 b, RE_f32 max_rad)
 
 RE_INLINE RE_V3_f32 RE_QUAT_FORWARD_f32(RE_QUAT_f32 q)
 {
-    return RE_QUAT_ROTATE_VEC3_SIMD_f32(q, (RE_V3_f32){0,0,-1});
+    return RE_QUAT_ROTATE_VEC3_f32(q, (RE_V3_f32){0,0,-1});
 }
 
 RE_INLINE RE_V3_f32 RE_QUAT_RIGHT_f32(RE_QUAT_f32 q)
 {
-    return RE_QUAT_ROTATE_VEC3_SIMD_f32(q, (RE_V3_f32){1,0,0});
+    return RE_QUAT_ROTATE_VEC3_f32(q, (RE_V3_f32){1,0,0});
 }
 
 RE_INLINE RE_V3_f32 RE_QUAT_UP_f32(RE_QUAT_f32 q)
 {
-    return RE_QUAT_ROTATE_VEC3_SIMD_f32(q, (RE_V3_f32){0,1,0});
+    return RE_QUAT_ROTATE_VEC3_f32(q, (RE_V3_f32){0,1,0});
 }
 
 #endif /* RE_QUAT_H */
