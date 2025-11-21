@@ -7,11 +7,11 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/unknown/dev/REMath/include -I/home/unknown/dev/REMath/dependencies/GLM
 
-C_FLAGS = 
+C_FLAGS = -msse3
 
 CXX_DEFINES = 
 
 CXX_INCLUDES = -I/home/unknown/dev/REMath/include -I/home/unknown/dev/REMath/dependencies/GLM
 
-CXX_FLAGS = -std=gnu++20
+CXX_FLAGS = -std=gnu++20 -msse3
 

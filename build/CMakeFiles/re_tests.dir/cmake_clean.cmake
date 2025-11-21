@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o.d"
   "CMakeFiles/re_tests.dir/tests/re_math_test.c.o"
   "CMakeFiles/re_tests.dir/tests/re_math_test.c.o.d"
+  "CMakeFiles/re_tests.dir/tests/re_quat_test.c.o"
+  "CMakeFiles/re_tests.dir/tests/re_quat_test.c.o.d"
   "CMakeFiles/re_tests.dir/tests/test_vec.cpp.o"
   "CMakeFiles/re_tests.dir/tests/test_vec.cpp.o.d"
   "re_tests"

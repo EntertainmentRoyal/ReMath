@@ -259,6 +259,30 @@ tests/re_math_test.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_math_test.c.s
 .PHONY : tests/re_math_test.c.s
 
+tests/re_quat_test.o: tests/re_quat_test.c.o
+.PHONY : tests/re_quat_test.o
+
+# target to build an object file
+tests/re_quat_test.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_quat_test.c.o
+.PHONY : tests/re_quat_test.c.o
+
+tests/re_quat_test.i: tests/re_quat_test.c.i
+.PHONY : tests/re_quat_test.i
+
+# target to preprocess a source file
+tests/re_quat_test.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_quat_test.c.i
+.PHONY : tests/re_quat_test.c.i
+
+tests/re_quat_test.s: tests/re_quat_test.c.s
+.PHONY : tests/re_quat_test.s
+
+# target to generate assembly for a file
+tests/re_quat_test.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_quat_test.c.s
+.PHONY : tests/re_quat_test.c.s
+
 tests/test_vec.o: tests/test_vec.cpp.o
 .PHONY : tests/test_vec.o
 
@@ -308,6 +332,9 @@ help:
 	@echo "... tests/re_math_test.o"
 	@echo "... tests/re_math_test.i"
 	@echo "... tests/re_math_test.s"
+	@echo "... tests/re_quat_test.o"
+	@echo "... tests/re_quat_test.i"
+	@echo "... tests/re_quat_test.s"
 	@echo "... tests/test_vec.o"
 	@echo "... tests/test_vec.i"
 	@echo "... tests/test_vec.s"

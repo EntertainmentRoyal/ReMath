@@ -39,6 +39,14 @@ target_compile_features(re_tests PRIVATE
 )
 
 # =============================
+# Compiler options (enable SSE3 for SIMD intrinsics)
+# =============================
+target_compile_options(re_tests PRIVATE
+    $<$<C_COMPILER_ID:GNU,Clang>:-msse3>
+    $<$<CXX_COMPILER_ID:GNU,Clang>:-msse3>
+)
+
+# =============================
 # Register CTest test
 # =============================
 add_test(NAME re_tests COMMAND re_tests)

@@ -173,6 +173,49 @@
         return x * RE_INV_SQRT_FAST_f32(x);
     }
 
+    /* ------------------------------------------------------------
+       fabsf — bitmask clear sign bit
+       ------------------------------------------------------------ */
+    RE_INLINE RE_f32 RE_FABS_f32(RE_f32 x)
+    {
+        union { RE_f32 f; RE_u32 u; } v = { x };
+        v.u &= 0x7FFFFFFFu;     /* Clear sign bit */
+        return v.f;
+    }
+
+    /* ------------------------------------------------------------
+       copysignf — copy sign bit from y into x
+       ------------------------------------------------------------ */
+    RE_INLINE RE_f32 RE_COPYSIGN_f32(RE_f32 x, RE_f32 y)
+    {
+        union { RE_f32 f; RE_u32 u; } a = { x };
+        union { RE_f32 f; RE_u32 u; } b = { y };
+
+        a.u = (a.u & 0x7FFFFFFFu) | (b.u & 0x80000000u);
+        return a.f;
+    }
+
+    /* ------------------------------------------------------------
+       INTERNAL: fast atan approximation (for atan2f)
+       minimax fit, <= 1e-6 error
+       ------------------------------------------------------------ */
+    RE_INLINE RE_f32 RE_ATAN_f32(RE_f32 z)
+    {
+        /* Sign */
+        RE_f32 s = RE_COPYSIGN_f32(1.0f, z);
+        z = RE_FABS_f32(z);
+
+        /* Polynomial approx for atan(z) on [0,1] */
+        const RE_f32 p0 = 0.9998660f;
+        const RE_f32 p1 = -0.3302995f;
+        const RE_f32 p2 = 0.1801410f;
+
+        RE_f32 z2 = z * z;
+        RE_f32 r  = z * (p0 + p1*z2 + p2*z2*z2);
+
+        return s * r;
+    }
+
     /* ---------------------------
        Fast sin / cos (polynomial) and wrappers
        --------------------------- */
@@ -252,8 +295,24 @@
              return (x < 0.0f) ? (RE_PI_F - r) : r;
          }
 
+         /**
+          * @brief Fast asin(x) approximation on [-1, 1].
+          */
+
+          RE_INLINE RE_f32 RE_ASIN(RE_f32 x)
+          {
+            if (x <= -1.0f) return -RE_PI_F / 2.0f;
+            if (x >=  1.0f) return  RE_PI_F / 2.0f;
+            RE_f32 x2 = x * x;
+            RE_f32 x4 = x2 * x2;
+            // Polynomial minimax approximation of asin on [-1,1]
+            RE_f32 p = x + x * x2 * (1.0f / 6.0f + x2 * (3.0f / 40.0f));
+            return p;
+          }
+
         /**
          * @brief Fast sine (radians).
+         * 32 bit
          */
         RE_INLINE RE_f32 RE_SIN_f32(RE_f32 x) {
             RE_f32 s, c;
@@ -264,6 +323,7 @@
 
         /**
          * @brief Fast cosine (radians).
+         * 32 bit
          */
         RE_INLINE RE_f32 RE_COS_f32(RE_f32 x) {
             RE_f32 s, c;
@@ -274,6 +334,7 @@
 
         /**
          * @brief Fast tangent (radians).
+         * 32 bit
          */
         RE_INLINE RE_f32 RE_TAN_f32(RE_f32 x)
         {

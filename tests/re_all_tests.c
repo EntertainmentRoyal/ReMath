@@ -13,6 +13,7 @@ void run_math_tests(void);
 void run_math_ext_tests(void);
 void run_vec_tests(void);
 void run_mat_tests(void);
+void run_quat_tests(void);
 
 int main(void)
 {
@@ -23,6 +24,7 @@ int main(void)
     run_math_ext_tests();
     run_vec_tests();
     run_mat_tests();
+    run_quat_tests();
 
     printf("=== REMath combined test suite finished ===\n");
     return 0;
