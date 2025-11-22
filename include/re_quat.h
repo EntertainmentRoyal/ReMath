@@ -379,29 +379,18 @@ RE_QUAT_ROTATE_AXIS_f32(RE_V3_f32 axis, RE_f32 angle_rad)
 
 RE_INLINE RE_QUAT_f32 RE_QUAT_FROM_EULER_f32(RE_V3_f32 e)
 {
+    RE_f32 cx = RE_COS_f32(e.x * 0.5f), sx = RE_SIN_f32(e.x * 0.5f);
+    RE_f32 cy = RE_COS_f32(e.y * 0.5f), sy = RE_SIN_f32(e.y * 0.5f);
+    RE_f32 cz = RE_COS_f32(e.z * 0.5f), sz = RE_SIN_f32(e.z * 0.5f);
+
     RE_QUAT_f32 q;
 
-    RE_f32 len = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
-        if (len > 0.0f) {
-            RE_f32 inv = 1.0f / len;
-            q.x *= inv; q.y *= inv; q.z *= inv; q.w *= inv;
-        }
+    q.x = sx*cy*cz - cx*sy*sz;
+    q.y = cx*sy*cz + sx*cy*sz;
+    q.z = cx*cy*sz - sx*sy*cz;
+    q.w = cx*cy*cz + sx*sy*sz;
 
-        RE_f32 sinp = 2.0f * (q.w*q.x + q.y*q.z);
-        RE_f32 cosp = 1.0f - 2.0f * (q.x*q.x + q.y*q.y);
-        e.x = RE_ATAN2_f32(sinp, cosp);
-
-        RE_f32 siny = 2.0f * (q.w*q.y - q.z*q.x);
-        if (RE_FABS_f32(siny) >= 1)
-            e.y = RE_COPYSIGN_f32(RE_PI_F/2.0f, siny);
-        else
-            e.y = RE_ASIN(siny);
-
-        RE_f32 sinr = 2.0f * (q.w*q.z + q.x*q.y);
-        RE_f32 cosr = 1.0f - 2.0f * (q.y*q.y + q.z*q.z);
-        e.z = RE_ATAN2_f32(sinr, cosr);
-
-        return q;
+    return q;
 }
 
 RE_INLINE RE_QUAT_f32 RE_QUAT_FROM_EULER_f64(RE_V3_f64 e)
@@ -430,67 +419,69 @@ RE_INLINE RE_QUAT_f32 RE_QUAT_FROM_EULER_f64(RE_V3_f64 e)
    QUATERNION → EULER
    ============================================================================ */
 
-RE_INLINE RE_V3_f32 RE_QUAT_TO_EULER_f32(RE_QUAT_f32 q)
-{
-    RE_V3_f32 e;
+   RE_INLINE RE_V3_f32 RE_QUAT_TO_EULER_f32(RE_QUAT_f32 q)
+   {
+       RE_V3_f32 e;
 
-    RE_f32 len = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
-    if (len > 0.0f) {
-        RE_f32 inv = 1.0f / len;
-        q.x *= inv; q.y *= inv; q.z *= inv; q.w *= inv;
-    }
+       // Normalize
+       RE_f32 len = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
+       if (len > 0.0f) {
+           RE_f32 inv = 1.0f / len;
+           q.x *= inv; q.y *= inv; q.z *= inv; q.w *= inv;
+       }
 
-    // ZYX extraction (roll, yaw, pitch)
-    // pitch (X)
-    RE_f32 sinp = 2.0f * (q.w*q.x + q.y*q.z);
-    RE_f32 cosp = 1.0f - 2.0f * (q.x*q.x + q.y*q.y);
-    e.x = RE_ATAN2_f32(sinp, cosp);
+       // ----- Correct XYZ extraction -----
 
-    // yaw (Y)
-    RE_f32 siny = 2.0f * (q.w*q.y - q.z*q.x);
-    if (RE_FABS_f32(siny) >= 1.0f)
-            e.y = RE_COPYSIGN_f32(RE_PI_F * 0.5f, siny); // clamp
-    else e.y = RE_ASIN(siny);
+       // Pitch (X)
+       RE_f32 t0 = +2.0f * (q.w*q.x + q.y*q.z);
+       RE_f32 t1 = +1.0f - 2.0f * (q.x*q.x + q.y*q.y);
+       e.x = RE_ATAN2_f32(t0, t1);
 
-    // roll (Z)
-    RE_f32 sinr = 2.0f * (q.w*q.z + q.x*q.y);
-    RE_f32 cosr = 1.0f - 2.0f * (q.y*q.y + q.z*q.z);
-    e.z = RE_ATAN2_f32(sinr, cosr);
+       // Yaw (Y)
+       RE_f32 t2 = +2.0f * (q.w*q.y - q.z*q.x);
+       t2 = RE_CLAMP_f32(t2, -1.0f, 1.0f);
+       e.y = RE_ASIN(t2);
 
-    return e;
-}
+       // Roll (Z)
+       RE_f32 t3 = +2.0f * (q.w*q.z + q.x*q.y);
+       RE_f32 t4 = +1.0f - 2.0f * (q.y*q.y + q.z*q.z);
+       e.z = RE_ATAN2_f32(t3, t4);
 
-RE_INLINE RE_V3_f64 RE_QUAT_TO_EULER_f64(RE_QUAT_f64 q)
-{
-    RE_V3_f64 e;
+       return e;
+   }
 
-    RE_f64 len = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
-    if (len > 0.0f) {
-        RE_f64 inv = 1.0f / len;
-        q.x *= inv; q.y *= inv; q.z *= inv; q.w *= inv;
-    }
 
-    RE_f64 sp = 2.0f * (q.w*q.x - q.y*q.z);
-    if (sp >= 1.0f)
-        e.x = RE_PI_F * 0.5f;   // +90°
-    else if (sp <= -1.0f)
-        e.x = -RE_PI_F * 0.5f;  // -90°
-    else
-        e.x = RE_ASIN(sp);
 
-    e.y = RE_ATAN2_f32(
-        2.0f * (q.w*q.y + q.z*q.x),
-        1.0f - 2.0f * (q.x*q.x + q.y*q.y)
-    );
+// RE_INLINE RE_V3_f64 RE_QUAT_TO_EULER_f64(RE_QUAT_f32 q)
+// {
+//     RE_V3_f64 e;
 
-    e.z = RE_ATAN2_f32(
-        2.0f * (q.w*q.z + q.x*q.y),
-        1.0f - 2.0f * (q.x*q.x + q.z*q.z)
-    );
+//     // Normalize
+//     RE_f64 len = RE_SQRT(q.x*q.x + q.y*q.y + q.z*q.z + q.w*q.w);
+//     if (len > 0.0f) {
+//         RE_f64 inv = 1.0f / len;
+//         q.x *= inv; q.y *= inv; q.z *= inv; q.w *= inv;
+//     }
 
-    return e;
-}
+//     // ----- Correct XYZ extraction -----
 
+//     // Pitch (X)
+//     RE_f64 t0 = +2.0f * (q.w*q.x + q.y*q.z);
+//     RE_f64 t1 = +1.0f - 2.0f * (q.x*q.x + q.y*q.y);
+//     e.x = RE_ATAN2_f32(t0, t1);
+
+//     // Yaw (Y)
+//     RE_f64 t2 = +2.0f * (q.w*q.y - q.z*q.x);
+//     t2 = RE_CLAMP_f32(t2, -1.0f, 1.0f);
+//     e.y = RE_ASIN(t2);
+
+//     // Roll (Z)
+//     RE_f64 t3 = +2.0f * (q.w*q.z + q.x*q.y);
+//     RE_f64 t4 = +1.0f - 2.0f * (q.y*q.y + q.z*q.z);
+//     e.z = RE_ATAN2_f32(t3, t4);
+
+//     return e;
+// }
 
 /* ============================================================================
    LERP

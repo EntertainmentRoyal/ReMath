@@ -34,7 +34,7 @@ typedef uint32_t RE_u32;
 typedef uint64_t RE_u64;
 
 /* Branchless boolean type */
-typedef int RE_bool;
+typedef int RE_BOOL;
 #ifndef RE_TRUE
 # define RE_TRUE  1
 # define RE_FALSE 0
@@ -212,19 +212,19 @@ RE_INLINE void RE_DECOMPOSE_f32(RE_f32 x, int *out_sign, int *out_exp, RE_u32 *o
 }
 
 /* isnan/isinf/isfinite for f32 (fast) */
-RE_INLINE RE_bool RE_ISNAN_f32(RE_f32 x) {
+RE_INLINE RE_BOOL RE_ISNAN_f32(RE_f32 x) {
     RE_f32U u; u.f = x;
     RE_u32 exp = (u.u >> 23) & 0xFFu;
     RE_u32 mant = u.u & 0x7FFFFFu;
     return (exp == 0xFFu) && (mant != 0u);
 }
-RE_INLINE RE_bool RE_ISINF_f32(RE_f32 x) {
+RE_INLINE RE_BOOL RE_ISINF_f32(RE_f32 x) {
     RE_f32U u; u.f = x;
     RE_u32 exp = (u.u >> 23) & 0xFFu;
     RE_u32 mant = u.u & 0x7FFFFFu;
     return (exp == 0xFFu) && (mant == 0u);
 }
-RE_INLINE RE_bool RE_ISFINITE_f32(RE_f32 x) {
+RE_INLINE RE_BOOL RE_ISFINITE_f32(RE_f32 x) {
     RE_f32U u; u.f = x;
     RE_u32 exp = (u.u >> 23) & 0xFFu;
     return (exp != 0xFFu);

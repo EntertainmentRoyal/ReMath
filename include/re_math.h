@@ -198,7 +198,7 @@ RE_INLINE RE_f32 RE_ROUND(RE_f32 x)
     // half-way threshold: 0.5 = bit (shift-1)
     RE_u32 half_bit = 1u << (shift - 1);
 
-    RE_bool round_up = (frac >= half_bit);
+    RE_BOOL round_up = (frac >= half_bit);
 
     if (!round_up)
         return truncated;
@@ -262,7 +262,7 @@ RE_INLINE RE_f32 RE_SQRT(RE_f32 number) {
 
 
 // Power of two helpers
-RE_INLINE RE_bool RE_IS_POW2(RE_u32 x) { return (x != 0) && ((x & (x - 1)) == 0); }
+RE_INLINE RE_BOOL RE_IS_POW2(RE_u32 x) { return (x != 0) && ((x & (x - 1)) == 0); }
 
 RE_INLINE RE_u32 RE_NEXT_POW2(RE_u32 x) {
     x--;
@@ -274,7 +274,7 @@ RE_INLINE RE_u32 RE_NEXT_POW2(RE_u32 x) {
     return x + 1;
 }
 
-RE_INLINE RE_bool RE_ISINF(RE_f32 x) {
+RE_INLINE RE_BOOL RE_ISINF(RE_f32 x) {
 	FloatBits fb;
 	fb.f = x;
 	RE_u32 bits = fb.i;
@@ -283,7 +283,7 @@ RE_INLINE RE_bool RE_ISINF(RE_f32 x) {
 	return (exp == 0xFF) && (mant == 0);
 }
 
-RE_INLINE RE_bool RE_ISNAN(RE_f32 x) {
+RE_INLINE RE_BOOL RE_ISNAN(RE_f32 x) {
 	FloatBits fb;
 	fb.f = x;
 	RE_u32 bits = fb.i;
@@ -292,7 +292,7 @@ RE_INLINE RE_bool RE_ISNAN(RE_f32 x) {
 	return (exp == 0xFF) && (mant != 0);
 }
 
-RE_INLINE RE_bool RE_ISFINITE(RE_f32 x) {
+RE_INLINE RE_BOOL RE_ISFINITE(RE_f32 x) {
 	FloatBits fb;
 	fb.f = x;
 	RE_u32 bits = fb.i;

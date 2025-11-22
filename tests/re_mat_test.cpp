@@ -31,36 +31,36 @@
    HELPERS
    ============================================================================================ */
 
-static RE_bool approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps) {
+static RE_BOOL approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps) {
     RE_f32 d = a - b; if (d < 0) d = -d; return d <= eps;
 }
-static RE_bool approx_eq_f64(RE_f64 a, RE_f64 b, RE_f64 eps) {
+static RE_BOOL approx_eq_f64(RE_f64 a, RE_f64 b, RE_f64 eps) {
     RE_f64 d = a - b; if (d < 0) d = -d; return d <= eps;
 }
 
-static RE_bool mat2_eq_f32(const RE_M2_F32 *A, const RE_M2_F32 *B, RE_f32 eps) {
+static RE_BOOL mat2_eq_f32(const RE_M2_F32 *A, const RE_M2_F32 *B, RE_f32 eps) {
     for(int i=0;i<4;i++) if(!approx_eq_f32(A->m[i],B->m[i],eps)) return RE_FALSE;
     return RE_TRUE;
 }
-static RE_bool mat2_eq_f64(const RE_M2_F64 *A, const RE_M2_F64 *B, RE_f64 eps) {
+static RE_BOOL mat2_eq_f64(const RE_M2_F64 *A, const RE_M2_F64 *B, RE_f64 eps) {
     for(int i=0;i<4;i++) if(!approx_eq_f64(A->m[i],B->m[i],eps)) return RE_FALSE;
     return RE_TRUE;
 }
 
-static RE_bool mat3_eq_f32(const RE_M3_F32 *A, const RE_M3_F32 *B, RE_f32 eps) {
+static RE_BOOL mat3_eq_f32(const RE_M3_F32 *A, const RE_M3_F32 *B, RE_f32 eps) {
     for(int i=0;i<9;i++) if(!approx_eq_f32(A->m[i],B->m[i],eps)) return RE_FALSE;
     return RE_TRUE;
 }
-static RE_bool mat3_eq_f64(const RE_M3_F64 *A, const RE_M3_F64 *B, RE_f64 eps) {
+static RE_BOOL mat3_eq_f64(const RE_M3_F64 *A, const RE_M3_F64 *B, RE_f64 eps) {
     for(int i=0;i<9;i++) if(!approx_eq_f64(A->m[i],B->m[i],eps)) return RE_FALSE;
     return RE_TRUE;
 }
 
-static RE_bool mat4_eq_f32(const RE_M4_F32 *A, const RE_M4_F32 *B, RE_f32 eps) {
+static RE_BOOL mat4_eq_f32(const RE_M4_F32 *A, const RE_M4_F32 *B, RE_f32 eps) {
     for(int i=0;i<16;i++) if(!approx_eq_f32(A->m[i],B->m[i],eps)) return RE_FALSE;
     return RE_TRUE;
 }
-static RE_bool mat4_eq_f64(const RE_M4_F64 *A, const RE_M4_F64 *B, RE_f64 eps) {
+static RE_BOOL mat4_eq_f64(const RE_M4_F64 *A, const RE_M4_F64 *B, RE_f64 eps) {
     for(int i=0;i<16;i++) if(!approx_eq_f64(A->m[i],B->m[i],eps)) return RE_FALSE;
     return RE_TRUE;
 }
@@ -89,7 +89,7 @@ static void test_m2(void)
     /* Get/Set */
     RE_M2_F32 B = RE_M2F32_ZERO();
     RE_M2F32_SET(&B,1,1,5.f);
-    RE_bool getset_ok = (RE_M2F32_GET(&B,1,1)==5.f);
+    RE_BOOL getset_ok = (RE_M2F32_GET(&B,1,1)==5.f);
     test_result("M2F32 get/set", getset_ok);
 
     /* Determinant */
@@ -102,7 +102,7 @@ static void test_m2(void)
 
     /* Inverse */
     RE_M2_F32 inv;
-    RE_bool ok = RE_M2F32_INVERSE(&inv,&A);
+    RE_BOOL ok = RE_M2F32_INVERSE(&inv,&A);
     test_result("M2F32 inverse detected invertible", ok);
 
     RE_M2_F32 AinvA = RE_M2F32_MULTIPLY(&A,&inv);
@@ -153,7 +153,7 @@ static void test_m3(void)
 
     /* Inverse (non-invertible A) */
     RE_M3_F32 inv;
-    RE_bool ok = RE_M3F32_INVERSE(&inv,&A);
+    RE_BOOL ok = RE_M3F32_INVERSE(&inv,&A);
     test_result("M3F32 inverse of singular yields false", !ok);
 
     /* Test a known invertible matrix */
@@ -258,7 +258,7 @@ static void test_m4_inverse(void)
     );
 
     RE_M4_F32 inv;
-    RE_bool ok = RE_M4F32_INVERSE(&inv,&A);
+    RE_BOOL ok = RE_M4F32_INVERSE(&inv,&A);
     test_result("M4F32 inverse exists", ok);
 
     RE_M4_F32 I = RE_M4F32_IDENTITY();

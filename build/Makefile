@@ -259,6 +259,30 @@ tests/re_math_test.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_math_test.c.s
 .PHONY : tests/re_math_test.c.s
 
+tests/re_noise_tests.o: tests/re_noise_tests.c.o
+.PHONY : tests/re_noise_tests.o
+
+# target to build an object file
+tests/re_noise_tests.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o
+.PHONY : tests/re_noise_tests.c.o
+
+tests/re_noise_tests.i: tests/re_noise_tests.c.i
+.PHONY : tests/re_noise_tests.i
+
+# target to preprocess a source file
+tests/re_noise_tests.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_noise_tests.c.i
+.PHONY : tests/re_noise_tests.c.i
+
+tests/re_noise_tests.s: tests/re_noise_tests.c.s
+.PHONY : tests/re_noise_tests.s
+
+# target to generate assembly for a file
+tests/re_noise_tests.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_noise_tests.c.s
+.PHONY : tests/re_noise_tests.c.s
+
 tests/re_quat_test.o: tests/re_quat_test.c.o
 .PHONY : tests/re_quat_test.o
 
@@ -282,6 +306,30 @@ tests/re_quat_test.s: tests/re_quat_test.c.s
 tests/re_quat_test.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_quat_test.c.s
 .PHONY : tests/re_quat_test.c.s
+
+tests/re_random_test.o: tests/re_random_test.c.o
+.PHONY : tests/re_random_test.o
+
+# target to build an object file
+tests/re_random_test.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_random_test.c.o
+.PHONY : tests/re_random_test.c.o
+
+tests/re_random_test.i: tests/re_random_test.c.i
+.PHONY : tests/re_random_test.i
+
+# target to preprocess a source file
+tests/re_random_test.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_random_test.c.i
+.PHONY : tests/re_random_test.c.i
+
+tests/re_random_test.s: tests/re_random_test.c.s
+.PHONY : tests/re_random_test.s
+
+# target to generate assembly for a file
+tests/re_random_test.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_random_test.c.s
+.PHONY : tests/re_random_test.c.s
 
 tests/test_vec.o: tests/test_vec.cpp.o
 .PHONY : tests/test_vec.o
@@ -332,9 +380,15 @@ help:
 	@echo "... tests/re_math_test.o"
 	@echo "... tests/re_math_test.i"
 	@echo "... tests/re_math_test.s"
+	@echo "... tests/re_noise_tests.o"
+	@echo "... tests/re_noise_tests.i"
+	@echo "... tests/re_noise_tests.s"
 	@echo "... tests/re_quat_test.o"
 	@echo "... tests/re_quat_test.i"
 	@echo "... tests/re_quat_test.s"
+	@echo "... tests/re_random_test.o"
+	@echo "... tests/re_random_test.i"
+	@echo "... tests/re_random_test.s"
 	@echo "... tests/test_vec.o"
 	@echo "... tests/test_vec.i"
 	@echo "... tests/test_vec.s"

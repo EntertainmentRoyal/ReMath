@@ -15,7 +15,7 @@
 /**
  * @brief Prints PASS/FAIL for each test (used only for dev debugging).
  */
- static void test_result(const char *name, RE_bool success)
+ static void test_result(const char *name, RE_BOOL success)
  {
      printf("[ %-40s ] %s%s%s\n",
             name,

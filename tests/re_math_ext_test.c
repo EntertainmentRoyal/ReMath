@@ -26,7 +26,7 @@
    TEST HELPERS
    ============================================================================================ */
 
-static RE_bool approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps)
+static RE_BOOL approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps)
 {
     return RE_ABS(a - b) <= eps;
 }
@@ -226,7 +226,7 @@ static void test_rcp(void)
         RE_f32 approx = RE_RCP(x);
         RE_f32 exact  = 1.0f / x;
 
-        RE_bool ok = approx_eq_f32(approx, exact, 1e-3f);
+        RE_BOOL ok = approx_eq_f32(approx, exact, 1e-3f);
 
         char label[64];
         snprintf(label, sizeof(label), "RCP(%g)", x);

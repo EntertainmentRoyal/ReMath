@@ -33,12 +33,12 @@
     #include <math.h>
     #include <stdio.h>
 
-    static RE_bool approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps)
+    static RE_BOOL approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps)
     {
         return RE_FABS_f32(a - b) <= eps;
     }
 
-    static RE_bool approx_vec3(RE_V3_f32 a, RE_V3_f32 b, RE_f32 eps)
+    static RE_BOOL approx_vec3(RE_V3_f32 a, RE_V3_f32 b, RE_f32 eps)
     {
         return approx_eq_f32(a.x,b.x,eps) &&
                approx_eq_f32(a.y,b.y,eps) &&
@@ -163,37 +163,66 @@
         test_result("FROM_EULER q.w", approx_eq_f32(q.w, ref.w, 1e-4f));
     }
 
+    static RE_BOOL quat_eq(RE_QUAT_f32 a, RE_QUAT_f32 b, float eps)
+    {
+        /* direct comparison */
+        if ( approx_eq_f32(a.x, b.x, eps) &&
+             approx_eq_f32(a.y, b.y, eps) &&
+             approx_eq_f32(a.z, b.z, eps) &&
+             approx_eq_f32(a.w, b.w, eps) )
+             return RE_TRUE;
+
+        /* sign-flipped comparison: q ≡ -q */
+        if ( approx_eq_f32(a.x, -b.x, eps) &&
+             approx_eq_f32(a.y, -b.y, eps) &&
+             approx_eq_f32(a.z, -b.z, eps) &&
+             approx_eq_f32(a.w, -b.w, eps) )
+             return RE_TRUE;
+
+        return RE_FALSE;
+    }
+
     static void test_to_euler_only(void)
     {
         struct Case {
-            RE_V3_f32 e;     // input Euler
+            RE_V3_f32 e;
         };
 
         struct Case cases[] = {
             { {0, 0, 0} },
-            { {RE_PI_F * 0.5f, 0, 0} },      // 90° pitch
-            { {0, RE_PI_F * 0.5f, 0} },      // 90° yaw
-            { {0, 0, RE_PI_F * 0.5f} },      // 90° roll
+            { {RE_PI_F * 0.5f, 0, 0} },
+            { {0, RE_PI_F * 0.5f, 0} },
+            { {0, 0, RE_PI_F * 0.5f} },
             { {RE_PI_F * 0.25f, RE_PI_F * 0.25f, RE_PI_F * 0.25f} },
             { {RE_PI_F * -0.25f, RE_PI_F * 0.1f, RE_PI_F * -0.3f} },
         };
 
         for (int i = 0; i < (int)(sizeof(cases)/sizeof(cases[0])); i++)
         {
-            RE_V3_f32 e      = cases[i].e;
-            RE_QUAT_f32 q    = RE_QUAT_FROM_EULER_f32(e);
-            RE_V3_f32 back   = RE_QUAT_TO_EULER_f32(q);
+            RE_V3_f32 e = cases[i].e;
 
-            char msgX[128], msgY[128], msgZ[128];
-            snprintf(msgX,128,"TO_EULER ONLY X case %d", i);
-            snprintf(msgY,128,"TO_EULER ONLY Y case %d", i);
-            snprintf(msgZ,128,"TO_EULER ONLY Z case %d", i);
+            RE_QUAT_f32 q1 = RE_QUAT_FROM_EULER_f32(e);
+            RE_V3_f32 back = RE_QUAT_TO_EULER_f32(q1);
+            RE_QUAT_f32 q2 = RE_QUAT_FROM_EULER_f32(back);
 
-            test_result(msgX, approx_eq_f32(e.x, back.x, 1e-3f));
-            test_result(msgY, approx_eq_f32(e.y, back.y, 1e-3f));
-            test_result(msgZ, approx_eq_f32(e.z, back.z, 1e-3f));
+            char msg[128];
+            snprintf(msg,128,"TO_EULER rotation equivalence case %d", i);
+
+            RE_BOOL same =
+                ( approx_eq_f32(q1.x, q2.x,1e-3f) &&
+                  approx_eq_f32(q1.y, q2.y,1e-3f) &&
+                  approx_eq_f32(q1.z, q2.z,1e-3f) &&
+                  approx_eq_f32(q1.w, q2.w,1e-3f) )
+                ||
+                ( approx_eq_f32(q1.x, -q2.x,1e-3f) &&
+                  approx_eq_f32(q1.y, -q2.y,1e-3f) &&
+                  approx_eq_f32(q1.z, -q2.z,1e-3f) &&
+                  approx_eq_f32(q1.w, -q2.w,1e-3f) );
+
+            test_result(msg, same);
         }
     }
+
 
     static void test_euler_conversion(void)
     {
@@ -333,7 +362,7 @@
         test_quat_dot();
         test_quat_len_norm();
         test_axis_angle();
-        // test_from_euler_only();
+        test_from_euler_only();
         // test_to_euler_only();
         // test_euler_conversion();
         test_hamilton_mul();

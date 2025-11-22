@@ -29,7 +29,7 @@
  * @param eps Allowed error tolerance.
  * @return RE_true if |a - b| <= eps.
  */
-static RE_bool approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps)
+static RE_BOOL approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps)
 {
     return RE_ABS(a - b) <= eps;
 }

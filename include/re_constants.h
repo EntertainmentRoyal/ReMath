@@ -21,6 +21,21 @@ extern "C" {
 #define RE_PI_D   		        3.141592653589793238462643383279502884
 #define RE_TAU_D  		        6.283185307179586476925286766559005768
 
+// OpenSimplex2S
+#ifndef OS3D_SCALE_F32
+#define OS3D_SCALE_F32 32.0f
+#endif
+#ifndef OS3D_SCALE_F64
+#define OS3D_SCALE_F64 32.0
+#endif
+
+#ifndef OS2D_SCALE_F32
+#define OS2D_SCALE_F32  (1.0f / 0.010016341f)
+#endif
+#ifndef OS2D_SCALE_F64
+#define OS2D_SCALE_F64  (1.0  / 0.010016341)
+#endif
+
 #ifdef __cplusplus
 }
 #endif

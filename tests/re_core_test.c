@@ -26,7 +26,7 @@
 /**
  * @brief Approximate float comparison helper.
  */
-static RE_bool approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps)
+static RE_BOOL approx_eq_f32(RE_f32 a, RE_f32 b, RE_f32 eps)
 {
     RE_f32 d = a - b;
     if (d < 0) d = -d;
@@ -141,7 +141,7 @@ static void test_ieee_classification(void)
          RE_f32 x = vals[i];
          RE_f32 fast = RE_SQRT(x);
          RE_f32 ref  = sqrtf(x);
-         RE_bool ok = approx_eq_f32(fast, ref, 1e-4f);
+         RE_BOOL ok = approx_eq_f32(fast, ref, 1e-4f);
          char name[64];
          snprintf(name, sizeof(name), "SQRT approx match [%g]", (double)x);
          test_result(name, ok);
