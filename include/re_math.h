@@ -38,7 +38,10 @@ RE_INLINE RE_f32 RE_CLAMP(RE_f32 x, RE_f32 minv, RE_f32 maxv)
 	return x < minv ? minv : (x > maxv ? maxv : x);
 }
 
-RE_INLINE RE_f32 RE_SATURATE(RE_f32 x) { return RE_CLAMP(x, 0.0f, 1.0f); }
+RE_INLINE RE_f32 RE_CLAMP01(RE_f32 x) {
+    RE_f32 t = x < 0.0f ? 0.0f : x;
+    return t > 1.0f ? 1.0f : t;
+}
 
 RE_INLINE RE_f32 RE_LERP(RE_f32 a, RE_f32 b, RE_f32 t) { return a + (b - a) * t; }
 
