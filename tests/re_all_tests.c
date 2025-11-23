@@ -16,6 +16,7 @@ void run_mat_tests(void);
 void run_quat_tests(void);
 void run_random_tests(void);
 void run_noise_tests(void);
+void test_color_all(void);
 
 int main(void)
 {
@@ -29,6 +30,7 @@ int main(void)
     run_quat_tests();
     run_random_tests();
     run_noise_tests();
+    test_color_all();
 
     printf("=== REMath combined test suite finished ===\n");
     return 0;

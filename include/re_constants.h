@@ -13,6 +13,7 @@ extern "C" {
 #define RE_INV_PI_F		        0.31830988618f		// (1.0f / RE_PI_F)
 #define RE_DEG2RAD_F		    0.01745329251f		// (RE_PI_F / 180.0f)
 #define RE_RAD2DEG_F		    57.2957795131f		// (180.0f / RE_PI_F)
+#define RE_LN2_F		        0.6931471805599453094172321214581765680755f
 
 #define RE_EPSILON_F		    1e-6f
 #define RE_SMALL_EPSILON_F	    1e-12f

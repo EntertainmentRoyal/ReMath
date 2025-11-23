@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/unknown/dev/REMath/tests/re_all_tests.c" "CMakeFiles/re_tests.dir/tests/re_all_tests.c.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_all_tests.c.o.d"
+  "/home/unknown/dev/REMath/tests/re_color_tests.c" "CMakeFiles/re_tests.dir/tests/re_color_tests.c.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_color_tests.c.o.d"
   "/home/unknown/dev/REMath/tests/re_core_test.c" "CMakeFiles/re_tests.dir/tests/re_core_test.c.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_core_test.c.o.d"
   "/home/unknown/dev/REMath/tests/re_math_ext_test.c" "CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o.d"
   "/home/unknown/dev/REMath/tests/re_math_test.c" "CMakeFiles/re_tests.dir/tests/re_math_test.c.o" "gcc" "CMakeFiles/re_tests.dir/tests/re_math_test.c.o.d"

@@ -29,9 +29,65 @@ CMakeFiles/re_tests.dir/tests/re_all_tests.c.o: /home/unknown/dev/REMath/tests/r
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
 
-CMakeFiles/re_tests.dir/tests/re_core_test.c.o: /home/unknown/dev/REMath/tests/re_core_test.c \
+CMakeFiles/re_tests.dir/tests/re_color_tests.c.o: /home/unknown/dev/REMath/tests/re_color_tests.c \
   /home/unknown/dev/REMath/include/re_constants.h \
   /home/unknown/dev/REMath/include/re_core.h \
+  /home/unknown/dev/REMath/include/re_color.h \
+  /home/unknown/dev/REMath/include/re_constants.h \
+  /home/unknown/dev/REMath/include/re_core.h \
+  /home/unknown/dev/REMath/include/re_math.h \
+  /home/unknown/dev/REMath/include/re_test_core.h \
+  /usr/include/assert.h \
+  /usr/include/features-time64.h \
+  /usr/include/features.h \
+  /usr/include/limits.h \
+  /usr/include/linux/limits.h \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdint.h \
+  /usr/include/stdio.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
+  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/timesize.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
+  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
+
+CMakeFiles/re_tests.dir/tests/re_core_test.c.o: /home/unknown/dev/REMath/tests/re_core_test.c \
+  /home/unknown/dev/REMath/include/re_constants.h \
+  /home/unknown/dev/REMath/include/re_constants.h \
   /home/unknown/dev/REMath/include/re_core.h \
   /home/unknown/dev/REMath/include/re_math.h \
   /home/unknown/dev/REMath/include/re_test_core.h \
@@ -44,6 +100,8 @@ CMakeFiles/re_tests.dir/tests/re_core_test.c.o: /home/unknown/dev/REMath/tests/r
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -71,8 +129,10 @@ CMakeFiles/re_tests.dir/tests/re_core_test.c.o: /home/unknown/dev/REMath/tests/r
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -159,6 +219,8 @@ CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o: /home/unknown/dev/REMath/tests/
   /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
@@ -254,6 +316,8 @@ CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o: /home/unknown/dev/REMath/tes
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -281,8 +345,10 @@ CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o: /home/unknown/dev/REMath/tes
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -299,7 +365,7 @@ CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o: /home/unknown/dev/REMath/tes
 
 CMakeFiles/re_tests.dir/tests/re_math_test.c.o: /home/unknown/dev/REMath/tests/re_math_test.c \
   /home/unknown/dev/REMath/include/re_constants.h \
-  /home/unknown/dev/REMath/include/re_core.h \
+  /home/unknown/dev/REMath/include/re_constants.h \
   /home/unknown/dev/REMath/include/re_core.h \
   /home/unknown/dev/REMath/include/re_math.h \
   /home/unknown/dev/REMath/include/re_test_core.h \
@@ -312,6 +378,8 @@ CMakeFiles/re_tests.dir/tests/re_math_test.c.o: /home/unknown/dev/REMath/tests/r
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -339,8 +407,10 @@ CMakeFiles/re_tests.dir/tests/re_math_test.c.o: /home/unknown/dev/REMath/tests/r
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -376,6 +446,8 @@ CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o: /home/unknown/dev/REMath/tests
   /usr/include/stdint.h \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
@@ -414,11 +486,13 @@ CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o: /home/unknown/dev/REMath/tests
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
@@ -465,6 +539,8 @@ CMakeFiles/re_tests.dir/tests/re_quat_test.c.o: /home/unknown/dev/REMath/tests/r
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -492,8 +568,10 @@ CMakeFiles/re_tests.dir/tests/re_quat_test.c.o: /home/unknown/dev/REMath/tests/r
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -527,6 +605,8 @@ CMakeFiles/re_tests.dir/tests/re_random_test.c.o: /home/unknown/dev/REMath/tests
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
+  /usr/include/string.h \
+  /usr/include/strings.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -554,8 +634,10 @@ CMakeFiles/re_tests.dir/tests/re_random_test.c.o: /home/unknown/dev/REMath/tests
   /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -1106,14 +1188,6 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/x86_64-linux-gnu/sys/single_threaded.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_relational.hpp:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double2x2.hpp:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/gtc/matrix_inverse.hpp:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/scalar_uint_sized.hpp:
-
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/scalar_constants.inl:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/vec4.hpp:
@@ -1156,6 +1230,10 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_vec1.hpp:
 
+/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double4x3.hpp:
+
 /home/unknown/dev/REMath/dependencies/GLM/glm/detail/func_vector_relational.inl:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/integer.hpp:
@@ -1163,8 +1241,6 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float4x4_precision.hpp:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/quaternion_exponential.hpp:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float3x4.hpp:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float3x2.hpp:
 
@@ -1182,10 +1258,6 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_quat.inl:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_vec4.inl:
-
-/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
-
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_projection.hpp:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/epsilon.hpp:
@@ -1195,8 +1267,6 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 /home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat2x4.hpp:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_int4x3.hpp:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/scalar_int_sized.hpp:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_vec2.hpp:
 
@@ -1274,12 +1344,6 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat4x2.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/gtc/packing.inl:
-
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_uint2x2.hpp:
@@ -1287,6 +1351,20 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 /home/unknown/dev/REMath/dependencies/GLM/glm/simd/platform.h:
 
 /usr/include/c++/13/bits/string_view.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float3x2_precision.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
 /usr/include/c++/13/bits/ranges_cmp.h:
 
@@ -1326,23 +1404,25 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/c++/13/bits/move.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float4x3.hpp:
+/usr/include/c++/13/bits/refwrap.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_packing.inl:
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float3x4.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_vec3.inl:
+/home/unknown/dev/REMath/include/re_color.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat3x2.hpp:
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float4x2_precision.hpp:
 
-/home/unknown/dev/REMath/tests/re_mat_test.cpp:
+/home/unknown/dev/REMath/dependencies/GLM/glm/detail/_noise.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_reciprocal.inl:
+/usr/include/c++/13/bits/requires_hosted.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/gtc/matrix_integer.hpp:
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+/usr/include/c++/13/bits/exception_defines.h:
 
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+/usr/include/c++/13/tr1/modified_bessel_func.tcc:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h:
 
 /usr/include/stdint.h:
 
@@ -1374,17 +1454,15 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/matrix_inverse.inl:
 
+/usr/include/c++/13/bits/utility.h:
+
+/home/unknown/dev/REMath/include/re_core.h:
+
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/constants.hpp:
 
 /home/unknown/dev/REMath/include/re_mat2.h:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_float1.hpp:
-
-/home/unknown/dev/REMath/include/re_mat.h:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
-/usr/include/c++/13/bits/locale_classes.h:
 
 /home/unknown/dev/REMath/include/re_test_core.h:
 
@@ -1394,35 +1472,21 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_transform.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_relational.inl:
-
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /home/unknown/dev/REMath/tests/re_core_test.c:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_common.inl:
 
 /usr/include/c++/13/bits/specfun.h:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/noise.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/quaternion_relational.inl:
-
-/usr/include/c++/13/bits/istream.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/endian.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
-
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h:
 
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_bool3_precision.hpp:
+/usr/include/c++/13/bits/locale_classes.h:
+
+/home/unknown/dev/REMath/include/re_mat.h:
 
 /usr/include/stdio.h:
 
@@ -1430,25 +1494,13 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/common.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float4x2_precision.hpp:
+/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat4x2.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/detail/_noise.hpp:
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
-/usr/include/c++/13/bits/requires_hosted.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
-/usr/include/c++/13/bits/exception_defines.h:
-
-/usr/include/c++/13/tr1/modified_bessel_func.tcc:
-
-/usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h:
+/home/unknown/dev/REMath/dependencies/GLM/glm/gtc/packing.inl:
 
 /usr/include/assert.h:
-
-/usr/include/c++/13/ext/type_traits.h:
-
-/usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/mat3x2.hpp:
 
@@ -1467,6 +1519,14 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/integer.inl:
 
 /usr/include/c++/13/cwchar:
+
+/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_vec4.inl:
+
+/usr/include/string.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_uint4_sized.hpp:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
@@ -1494,21 +1554,73 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/x86_64-linux-gnu/bits/timex.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-
 /usr/include/c++/13/bits/cpp_type_traits.h:
 
 /usr/include/c++/13/cassert:
 
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
 /usr/include/x86_64-linux-gnu/bits/types.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double4x2_precision.hpp:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_bool3_precision.hpp:
+
+/usr/include/strings.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_int3_sized.hpp:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/float.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/scalar_int_sized.hpp:
+
+/usr/include/c++/13/tr1/gamma.tcc:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
 
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_common.inl:
+
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/scalar_packing.inl:
+
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double4x3_precision.hpp:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_reciprocal.inl:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+
+/usr/include/c++/13/ext/type_traits.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/gtc/matrix_integer.hpp:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float4x3.hpp:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_packing.inl:
+
+/home/unknown/dev/REMath/include/re_constants.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
-/home/unknown/dev/REMath/include/re_constants.h:
+/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_vec3.inl:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat3x2.hpp:
+
+/home/unknown/dev/REMath/tests/re_mat_test.cpp:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/quaternion_relational.inl:
+
+/usr/include/c++/13/bits/istream.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
 
 /home/unknown/dev/REMath/include/re_mat3.h:
 
@@ -1572,9 +1684,9 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
-/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
-
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_float2.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat3x2.inl:
 
@@ -1628,9 +1740,9 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat4x2.inl:
 
-/usr/include/c++/13/tr1/hypergeometric.tcc:
-
 /home/unknown/dev/REMath/tests/re_all_tests.c:
+
+/usr/include/c++/13/tr1/hypergeometric.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
@@ -1660,21 +1772,13 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/c++/13/initializer_list:
 
-/home/unknown/dev/REMath/include/re_core.h:
-
-/usr/include/c++/13/bits/utility.h:
-
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_uint3x2.hpp:
 
 /usr/include/c++/13/tr1/ell_integral.tcc:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/float.h:
-
-/usr/include/c++/13/tr1/gamma.tcc:
+/usr/include/features-time64.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
-
-/usr/include/features-time64.h:
 
 /usr/include/c++/13/type_traits:
 
@@ -1686,19 +1790,11 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/quaternion_double_precision.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_int3x2_sized.hpp:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double4x2_precision.hpp:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+/usr/include/c++/13/tr1/poly_laguerre.tcc:
 
 /usr/include/c++/13/tr1/special_function_util.h:
 
-/usr/include/c++/13/tr1/poly_laguerre.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/scalar_packing.inl:
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_int3x2_sized.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
 
@@ -1712,15 +1808,15 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
 
-/usr/include/c++/13/bits/refwrap.h:
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/scalar_uint_sized.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float3x2_precision.hpp:
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_relational.hpp:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h:
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double2x2.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/select.h:
+/home/unknown/dev/REMath/dependencies/GLM/glm/gtc/matrix_inverse.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/time.h:
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_relational.inl:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double2x2_precision.hpp:
 
@@ -1764,11 +1860,11 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/matrix_transform.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat2x3.inl:
-
 /usr/include/features.h:
 
 /usr/include/c++/13/string:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/detail/type_mat2x3.inl:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_double1.hpp:
 
@@ -1802,10 +1898,6 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/c++/13/bits/char_traits.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double4x3.hpp:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
-
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/packing.hpp:
 
 /usr/include/c++/13/bits/allocator.h:
@@ -1823,6 +1915,12 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 /usr/include/c++/13/bits/stl_iterator_base_funcs.h:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/gtc/bitfield.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
+
+/usr/include/c++/13/bits/predefined_ops.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/quaternion_common.inl:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/quaternion_transform.hpp:
 
@@ -1912,10 +2010,6 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/packing.hpp:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_int3_sized.hpp:
-
-/usr/include/strings.h:
-
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_int4_sized.hpp:
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_integer.hpp:
@@ -1936,17 +2030,7 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_uint3.hpp:
 
-/usr/include/c++/13/bits/predefined_ops.h:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/quaternion_common.inl:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
-
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_uint4.hpp:
-
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/vector_uint4_sized.hpp:
-
-/usr/include/string.h:
 
 /usr/include/stdlib.h:
 
@@ -2028,9 +2112,9 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/c++/13/bits/basic_string.h:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float4x2.hpp:
-
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_float4x2.hpp:
 
 /usr/include/c++/13/bits/basic_string.tcc:
 
@@ -2064,9 +2148,9 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/c++/13/bits/nested_exception.h:
 
-/home/unknown/dev/REMath/include/re_vec.h:
-
 /usr/include/ctype.h:
+
+/home/unknown/dev/REMath/include/re_vec.h:
 
 /usr/include/c++/13/cfloat:
 
@@ -2074,9 +2158,9 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 
 /usr/include/c++/13/tuple:
 
-/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_int2x4.hpp:
-
 /home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_double2x4.hpp:
+
+/home/unknown/dev/REMath/dependencies/GLM/glm/ext/matrix_int2x4.hpp:
 
 /usr/include/c++/13/bits/new_allocator.h:
 
@@ -2163,6 +2247,8 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/tes
 /usr/include/errno.h:
 
 /usr/include/locale.h:
+
+/home/unknown/dev/REMath/tests/re_color_tests.c:
 
 /usr/include/sched.h:
 

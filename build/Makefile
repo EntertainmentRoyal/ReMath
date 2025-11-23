@@ -163,6 +163,30 @@ tests/re_all_tests.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_all_tests.c.s
 .PHONY : tests/re_all_tests.c.s
 
+tests/re_color_tests.o: tests/re_color_tests.c.o
+.PHONY : tests/re_color_tests.o
+
+# target to build an object file
+tests/re_color_tests.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_color_tests.c.o
+.PHONY : tests/re_color_tests.c.o
+
+tests/re_color_tests.i: tests/re_color_tests.c.i
+.PHONY : tests/re_color_tests.i
+
+# target to preprocess a source file
+tests/re_color_tests.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_color_tests.c.i
+.PHONY : tests/re_color_tests.c.i
+
+tests/re_color_tests.s: tests/re_color_tests.c.s
+.PHONY : tests/re_color_tests.s
+
+# target to generate assembly for a file
+tests/re_color_tests.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/re_tests.dir/build.make CMakeFiles/re_tests.dir/tests/re_color_tests.c.s
+.PHONY : tests/re_color_tests.c.s
+
 tests/re_core_test.o: tests/re_core_test.c.o
 .PHONY : tests/re_core_test.o
 
@@ -368,6 +392,9 @@ help:
 	@echo "... tests/re_all_tests.o"
 	@echo "... tests/re_all_tests.i"
 	@echo "... tests/re_all_tests.s"
+	@echo "... tests/re_color_tests.o"
+	@echo "... tests/re_color_tests.i"
+	@echo "... tests/re_color_tests.s"
 	@echo "... tests/re_core_test.o"
 	@echo "... tests/re_core_test.i"
 	@echo "... tests/re_core_test.s"

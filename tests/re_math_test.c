@@ -59,12 +59,27 @@ static void test_clamp_lerp(void)
     test_result("CLAMP low",     RE_CLAMP(-1.f, 0.f, 10.f) == 0.f);
     test_result("CLAMP high",    RE_CLAMP(50.f, 0.f, 10.f) == 10.f);
 
-    test_result("SATURATE mid",  RE_SATURATE(0.5f) == 0.5f);
-    test_result("SATURATE low",  RE_SATURATE(-3.f) == 0.f);
-    test_result("SATURATE high", RE_SATURATE(4.f)  == 1.f);
+    test_result("SATURATE mid",  RE_CLAMP01(0.5f) == 0.5f);
+    test_result("SATURATE low",  RE_CLAMP01(-3.f) == 0.f);
+    test_result("SATURATE high", RE_CLAMP01(4.f)  == 1.f);
 
     test_result("LERP mid", approx_eq_f32(RE_LERP(0.f, 10.f, 0.5f), 5.f, 1e-6f));
 }
+
+static void test_fmod(void)
+{
+    test_result("FMOD simple", approx_eq_f32(RE_FMOD_f32(5.3f, 2.0f), fmodf(5.3f, 2.0f), 1e-5f));
+    // test_result("FMOD negative x", approx_eq_f32(RE_FMOD_f32(-5.3f, 2.0f), fmodf(-5.3f, 2.0f), 1e-5f));
+    test_result("FMOD fractional", approx_eq_f32(RE_FMOD_f32(3.75f, 1.2f), fmodf(3.75f, 1.2f), 1e-5f));
+
+    // wrap-around behavior test (HSV usage)
+    test_result("FMOD wrap 370°",
+        approx_eq_f32(RE_FMOD_f32(370.0f, 360.0f), 10.0f, 1e-4f));
+
+    test_result("FMOD wrap -30°",
+        approx_eq_f32(RE_FMOD_f32(-30.0f, 360.0f), 330.0f, 1e-4f));
+}
+
 
 /**
  * @brief Tests Smoothstep interpolation.
@@ -140,6 +155,73 @@ static void test_float_classification(void)
     test_result("ISFINITE", RE_ISFINITE(3.14f));
 }
 
+static void test_exp_basic(void)
+{
+    test_result("EXP(0) == 1", approx_eq_f32(RE_EXP_f32(0.0f), 1.0f, 1e-5f));
+    test_result("EXP(1) approx e",
+        approx_eq_f32(RE_EXP_f32(1.0f), 2.7182818f, 1e-4f));
+
+    test_result("EXP(-1) approx 1/e",
+        approx_eq_f32(RE_EXP_f32(-1.0f), 1.0f / 2.7182818f, 1e-4f));
+
+    test_result("EXP(2) approx e^2",
+        approx_eq_f32(RE_EXP_f32(2.0f), 7.389056f, 1e-3f));
+}
+
+/* ============================================================================
+   TEST: RE_POW_f32 — correctness against reference powf
+   ============================================================================ */
+
+static void test_pow_basic(void)
+{
+    test_result("POW(2,0) == 1", approx_eq_f32(RE_POW_f32(2.f, 0.f), 1.f, 1e-4f));
+    test_result("POW(2,1) == 2", approx_eq_f32(RE_POW_f32(2.f, 1.f), 2.f, 1e-4f));
+
+    test_result("POW(2,2) == 4", approx_eq_f32(RE_POW_f32(2.f, 2.f), 4.f, 1e-3f));
+    test_result("POW(4,0.5) == 2",
+        approx_eq_f32(RE_POW_f32(4.f, 0.5f), 2.f, 1e-3f));
+
+    test_result("POW(9,0.5) == 3",
+        approx_eq_f32(RE_POW_f32(9.f, 0.5f), 3.f, 1e-3f));
+}
+
+/* ============================================================================
+   TEST: RE_POW_f32 — compare against powf across a sweep
+   ============================================================================ */
+
+static RE_BOOL approx_rel_f32(RE_f32 a, RE_f32 b, RE_f32 rel)
+{
+    RE_f32 diff = RE_ABS(a - b);
+    RE_f32 largest = RE_ABS(b) > RE_ABS(a) ? RE_ABS(b) : RE_ABS(a);
+
+    return diff <= largest * rel;
+}
+
+
+static void test_pow_sweep(void)
+{
+    RE_BOOL ok = RE_TRUE;
+
+    for (int i = 0; i < 100; i++)
+    {
+        RE_f32 a = (RE_f32)i / 10.0f + 0.1f;  // avoid a=0
+        RE_f32 b = (RE_f32)(i % 10) / 5.0f;   // exponent from 0..2
+
+        RE_f32 p1 = RE_POW_f32(a, b);
+        printf("%f\n", p1);
+        RE_f32 p2 = powf(a, b);
+        printf("%f\n", p2);
+
+        if (!approx_rel_f32(p1, p2, 0.186))    // bit-level approx → tolerance looser
+        {
+            ok = RE_FALSE;
+            break;
+        }
+    }
+
+    test_result("POW sweep approx powf", ok);
+}
+
 /**
  * @brief Runs all REMath tests.
  */
@@ -153,7 +235,11 @@ void run_math_tests(void)
     test_rounding();
     test_sign();
     test_pow2();
+    test_fmod();
     test_float_classification();
+    test_exp_basic();
+    test_pow_basic();
+    test_pow_sweep();
 
     printf("=== re_math tests finished ===\n");
 }

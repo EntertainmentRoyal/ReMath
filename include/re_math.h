@@ -13,7 +13,10 @@
 #define RE_MATH_H
 
 #include "re_core.h"
+#include "re_constants.h"
+
 #include <float.h>
+#include <string.h>
 
 /**
  * @defgroup REMath_Core
@@ -47,7 +50,7 @@ RE_INLINE RE_f32 RE_LERP(RE_f32 a, RE_f32 b, RE_f32 t) { return a + (b - a) * t;
 
 RE_INLINE RE_f32 RE_SMOOTHSTEP(RE_f32 a, RE_f32 b, RE_f32 t)
 {
-	t = RE_SATURATE((t-a) / (b - a));
+	t = RE_CLAMP01((t-a) / (b - a));
 	RE_i32 t_bits = *(RE_i32*)&t;
 	t_bits += (1 << 23);
 	RE_f32 two_t = *(RE_f32*)&t_bits;
@@ -301,6 +304,93 @@ RE_INLINE RE_BOOL RE_ISFINITE(RE_f32 x) {
 	RE_u32 bits = fb.i;
 	RE_u32 exp  = (bits >> 23) & 0xFF;
 	return exp != 0xFF;
+}
+
+RE_INLINE RE_f32 RE_LOG2_f32(RE_f32 x)
+{
+    union { RE_f32 f; RE_u32 i; } v = { x };
+
+    RE_i32 ex = (v.i >> 23) & 255;
+    RE_f32 e  = (RE_f32)ex - 127.0f;
+
+    v.i = (v.i & 0x7FFFFF) | (127 << 23);
+    RE_f32 m = v.f;
+
+    // Polynomial: log2(m) ≈ p(m)
+    RE_f32 t = m - 1.0f;
+    RE_f32 p = t * (1.4426950408889634f +
+            t * (-0.7213475204444817f +
+            t * (0.480898346962987f)));
+
+    return e + p;
+}
+
+RE_INLINE RE_f32 RE_EXP_f32(RE_f32 x)
+{
+    if (x > 88.0f)  return 3.402823e38f;
+        if (x < -88.0f) return 0.0f;
+
+        const RE_f32 inv_ln2 = 1.4426950408889634f;
+        RE_f32 fx = x * inv_ln2;
+
+        RE_i32 ix = (RE_i32)fx;
+        if (fx < 0.0f) ix--;
+
+        RE_f32 f = fx - (RE_f32)ix;
+
+        RE_f32 p =
+               1.0f +
+            f *(0.69314718f +
+            f *(0.24022651f +
+            f *(0.05550411f +
+            f *(0.00961813f +
+            f *0.00133336f))));
+
+        RE_i32 e = (ix + 127) << 23;
+
+        RE_f32 pow2i;
+        memcpy(&pow2i, &e, sizeof(e));
+
+        return pow2i * p;
+}
+
+RE_INLINE RE_f32 RE_POW_f32(RE_f32 a, RE_f32 b)
+{
+    if (a <= 0.0f) return 0.0f;
+
+    if (b == 0.0f) return 1.0f;
+    if (b == 1.0f) return a;
+    if (b == 2.0f) return a * a;
+    if (b == 0.5f) return RE_SQRT(a);
+    if (b == -1.0f) return 1.0f / a;
+
+    RE_f32 ln_a = RE_LOG2_f32(a) * RE_LN2_F;
+
+    RE_f32 t = b * ln_a;
+    return RE_EXP_f32(t);
+}
+
+RE_INLINE RE_f32 RE_FMOD_f32(RE_f32 x, RE_f32 y)
+{
+    if (y == 0.0f)
+        return 0.0f;
+
+    RE_f32 r = x - (RE_f32)((RE_i32)(x / y)) * y;
+
+    if ((r != 0.0f) && ((r < 0.0f) != (y < 0.0f)))
+        r += y;
+
+    return r;
+}
+
+RE_INLINE RE_f32 RE_FMAX_f32(RE_f32 a, RE_f32 b)
+{
+    return (a > b) ? a : b;
+}
+
+RE_INLINE RE_f32 RE_FMIN_f32(RE_f32 a, RE_f32 b)
+{
+    return (a < b) ? a : b;
 }
 
 

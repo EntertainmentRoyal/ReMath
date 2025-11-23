@@ -1,7 +1,9 @@
-CMakeFiles/re_tests.dir/tests/re_quat_test.c.o: \
- /home/unknown/dev/REMath/tests/re_quat_test.c /usr/include/stdc-predef.h \
- /home/unknown/dev/REMath/tests/../include/re_quat.h \
- /home/unknown/dev/REMath/tests/../include/re_core.h \
+CMakeFiles/re_tests.dir/tests/re_color_tests.c.o: \
+ /home/unknown/dev/REMath/tests/re_color_tests.c \
+ /usr/include/stdc-predef.h \
+ /home/unknown/dev/REMath/tests/../include/re_test_core.h \
+ /home/unknown/dev/REMath/tests/../include/./re_constants.h \
+ /home/unknown/dev/REMath/tests/../include/./re_core.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -26,21 +28,9 @@ CMakeFiles/re_tests.dir/tests/re_quat_test.c.o: \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
- /home/unknown/dev/REMath/tests/../include/re_math.h \
- /home/unknown/dev/REMath/tests/../include/re_constants.h \
- /usr/include/string.h /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h \
- /home/unknown/dev/REMath/tests/../include/re_math_ext.h \
- /home/unknown/dev/REMath/tests/../include/re_vec.h \
- /home/unknown/dev/REMath/tests/../include/re_vec.h \
- /home/unknown/dev/REMath/tests/../include/re_math.h \
- /home/unknown/dev/REMath/tests/../include/re_math_ext.h \
- /home/unknown/dev/REMath/tests/../include/re_test_core.h \
- /home/unknown/dev/REMath/tests/../include/./re_constants.h \
- /usr/include/stdio.h /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h /usr/include/stdio.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
@@ -51,10 +41,11 @@ CMakeFiles/re_tests.dir/tests/re_quat_test.c.o: \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/assert.h \
- /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h
+ /home/unknown/dev/REMath/tests/../include/re_color.h \
+ /home/unknown/dev/REMath/tests/../include/re_core.h \
+ /home/unknown/dev/REMath/tests/../include/re_math.h \
+ /home/unknown/dev/REMath/tests/../include/re_constants.h \
+ /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/strings.h

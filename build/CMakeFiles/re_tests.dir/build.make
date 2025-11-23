@@ -83,10 +83,24 @@ CMakeFiles/re_tests.dir/tests/re_all_tests.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/re_tests.dir/tests/re_all_tests.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/unknown/dev/REMath/tests/re_all_tests.c -o CMakeFiles/re_tests.dir/tests/re_all_tests.c.s
 
+CMakeFiles/re_tests.dir/tests/re_color_tests.c.o: CMakeFiles/re_tests.dir/flags.make
+CMakeFiles/re_tests.dir/tests/re_color_tests.c.o: /home/unknown/dev/REMath/tests/re_color_tests.c
+CMakeFiles/re_tests.dir/tests/re_color_tests.c.o: CMakeFiles/re_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/re_tests.dir/tests/re_color_tests.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/re_color_tests.c.o -MF CMakeFiles/re_tests.dir/tests/re_color_tests.c.o.d -o CMakeFiles/re_tests.dir/tests/re_color_tests.c.o -c /home/unknown/dev/REMath/tests/re_color_tests.c
+
+CMakeFiles/re_tests.dir/tests/re_color_tests.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/re_tests.dir/tests/re_color_tests.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/unknown/dev/REMath/tests/re_color_tests.c > CMakeFiles/re_tests.dir/tests/re_color_tests.c.i
+
+CMakeFiles/re_tests.dir/tests/re_color_tests.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/re_tests.dir/tests/re_color_tests.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/unknown/dev/REMath/tests/re_color_tests.c -o CMakeFiles/re_tests.dir/tests/re_color_tests.c.s
+
 CMakeFiles/re_tests.dir/tests/re_core_test.c.o: CMakeFiles/re_tests.dir/flags.make
 CMakeFiles/re_tests.dir/tests/re_core_test.c.o: /home/unknown/dev/REMath/tests/re_core_test.c
 CMakeFiles/re_tests.dir/tests/re_core_test.c.o: CMakeFiles/re_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/re_tests.dir/tests/re_core_test.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/re_tests.dir/tests/re_core_test.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/re_core_test.c.o -MF CMakeFiles/re_tests.dir/tests/re_core_test.c.o.d -o CMakeFiles/re_tests.dir/tests/re_core_test.c.o -c /home/unknown/dev/REMath/tests/re_core_test.c
 
 CMakeFiles/re_tests.dir/tests/re_core_test.c.i: cmake_force
@@ -100,7 +114,7 @@ CMakeFiles/re_tests.dir/tests/re_core_test.c.s: cmake_force
 CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o: CMakeFiles/re_tests.dir/flags.make
 CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o: /home/unknown/dev/REMath/tests/re_mat_test.cpp
 CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o: CMakeFiles/re_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o -MF CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o.d -o CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o -c /home/unknown/dev/REMath/tests/re_mat_test.cpp
 
 CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.i: cmake_force
@@ -114,7 +128,7 @@ CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.s: cmake_force
 CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o: CMakeFiles/re_tests.dir/flags.make
 CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o: /home/unknown/dev/REMath/tests/re_math_ext_test.c
 CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o: CMakeFiles/re_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o -MF CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o.d -o CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o -c /home/unknown/dev/REMath/tests/re_math_ext_test.c
 
 CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.s: cmake_force
 CMakeFiles/re_tests.dir/tests/re_math_test.c.o: CMakeFiles/re_tests.dir/flags.make
 CMakeFiles/re_tests.dir/tests/re_math_test.c.o: /home/unknown/dev/REMath/tests/re_math_test.c
 CMakeFiles/re_tests.dir/tests/re_math_test.c.o: CMakeFiles/re_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/re_tests.dir/tests/re_math_test.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/re_tests.dir/tests/re_math_test.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/re_math_test.c.o -MF CMakeFiles/re_tests.dir/tests/re_math_test.c.o.d -o CMakeFiles/re_tests.dir/tests/re_math_test.c.o -c /home/unknown/dev/REMath/tests/re_math_test.c
 
 CMakeFiles/re_tests.dir/tests/re_math_test.c.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/re_tests.dir/tests/re_math_test.c.s: cmake_force
 CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o: CMakeFiles/re_tests.dir/flags.make
 CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o: /home/unknown/dev/REMath/tests/re_noise_tests.c
 CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o: CMakeFiles/re_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o -MF CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o.d -o CMakeFiles/re_tests.dir/tests/re_noise_tests.c.o -c /home/unknown/dev/REMath/tests/re_noise_tests.c
 
 CMakeFiles/re_tests.dir/tests/re_noise_tests.c.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/re_tests.dir/tests/re_noise_tests.c.s: cmake_force
 CMakeFiles/re_tests.dir/tests/re_quat_test.c.o: CMakeFiles/re_tests.dir/flags.make
 CMakeFiles/re_tests.dir/tests/re_quat_test.c.o: /home/unknown/dev/REMath/tests/re_quat_test.c
 CMakeFiles/re_tests.dir/tests/re_quat_test.c.o: CMakeFiles/re_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/re_tests.dir/tests/re_quat_test.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/re_tests.dir/tests/re_quat_test.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/re_quat_test.c.o -MF CMakeFiles/re_tests.dir/tests/re_quat_test.c.o.d -o CMakeFiles/re_tests.dir/tests/re_quat_test.c.o -c /home/unknown/dev/REMath/tests/re_quat_test.c
 
 CMakeFiles/re_tests.dir/tests/re_quat_test.c.i: cmake_force
@@ -170,7 +184,7 @@ CMakeFiles/re_tests.dir/tests/re_quat_test.c.s: cmake_force
 CMakeFiles/re_tests.dir/tests/re_random_test.c.o: CMakeFiles/re_tests.dir/flags.make
 CMakeFiles/re_tests.dir/tests/re_random_test.c.o: /home/unknown/dev/REMath/tests/re_random_test.c
 CMakeFiles/re_tests.dir/tests/re_random_test.c.o: CMakeFiles/re_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/re_tests.dir/tests/re_random_test.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/re_tests.dir/tests/re_random_test.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/re_random_test.c.o -MF CMakeFiles/re_tests.dir/tests/re_random_test.c.o.d -o CMakeFiles/re_tests.dir/tests/re_random_test.c.o -c /home/unknown/dev/REMath/tests/re_random_test.c
 
 CMakeFiles/re_tests.dir/tests/re_random_test.c.i: cmake_force
@@ -184,7 +198,7 @@ CMakeFiles/re_tests.dir/tests/re_random_test.c.s: cmake_force
 CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: CMakeFiles/re_tests.dir/flags.make
 CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: /home/unknown/dev/REMath/tests/test_vec.cpp
 CMakeFiles/re_tests.dir/tests/test_vec.cpp.o: CMakeFiles/re_tests.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/re_tests.dir/tests/test_vec.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/re_tests.dir/tests/test_vec.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/re_tests.dir/tests/test_vec.cpp.o -MF CMakeFiles/re_tests.dir/tests/test_vec.cpp.o.d -o CMakeFiles/re_tests.dir/tests/test_vec.cpp.o -c /home/unknown/dev/REMath/tests/test_vec.cpp
 
 CMakeFiles/re_tests.dir/tests/test_vec.cpp.i: cmake_force
@@ -198,6 +212,7 @@ CMakeFiles/re_tests.dir/tests/test_vec.cpp.s: cmake_force
 # Object files for target re_tests
 re_tests_OBJECTS = \
 "CMakeFiles/re_tests.dir/tests/re_all_tests.c.o" \
+"CMakeFiles/re_tests.dir/tests/re_color_tests.c.o" \
 "CMakeFiles/re_tests.dir/tests/re_core_test.c.o" \
 "CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o" \
 "CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o" \
@@ -211,6 +226,7 @@ re_tests_OBJECTS = \
 re_tests_EXTERNAL_OBJECTS =
 
 re_tests: CMakeFiles/re_tests.dir/tests/re_all_tests.c.o
+re_tests: CMakeFiles/re_tests.dir/tests/re_color_tests.c.o
 re_tests: CMakeFiles/re_tests.dir/tests/re_core_test.c.o
 re_tests: CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o
 re_tests: CMakeFiles/re_tests.dir/tests/re_math_ext_test.c.o
@@ -221,7 +237,7 @@ re_tests: CMakeFiles/re_tests.dir/tests/re_random_test.c.o
 re_tests: CMakeFiles/re_tests.dir/tests/test_vec.cpp.o
 re_tests: CMakeFiles/re_tests.dir/build.make
 re_tests: CMakeFiles/re_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable re_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/unknown/dev/REMath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable re_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/re_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

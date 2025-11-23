@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/re_tests.dir/tests/re_all_tests.c.o"
   "CMakeFiles/re_tests.dir/tests/re_all_tests.c.o.d"
+  "CMakeFiles/re_tests.dir/tests/re_color_tests.c.o"
+  "CMakeFiles/re_tests.dir/tests/re_color_tests.c.o.d"
   "CMakeFiles/re_tests.dir/tests/re_core_test.c.o"
   "CMakeFiles/re_tests.dir/tests/re_core_test.c.o.d"
   "CMakeFiles/re_tests.dir/tests/re_mat_test.cpp.o"
